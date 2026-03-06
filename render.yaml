@@ -1,0 +1,42 @@
+services:
+  # ──────────────────────────────────────────────────────────
+  # Backend Service (Python FastAPI + LaTeX Docker)
+  # ──────────────────────────────────────────────────────────
+  - type: web
+    name: airo-backend
+    env: docker
+    rootDir: backend
+    plan: free # Change to 'starter' if you need more RAM for ML models
+    envVars:
+      - key: MONGO_URI
+        sync: false # You will need to paste this in Render Dashboard
+      - key: DB_NAME
+        value: airo_db
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: JWT_ALGO
+        value: HS256
+      - key: GROQ_API_KEY
+        sync: false # You will need to paste this in Render Dashboard
+      - key: MAIL_USERNAME
+        sync: false
+      - key: MAIL_PASSWORD
+        sync: false
+      - key: MAIL_FROM
+        sync: false
+
+  # ──────────────────────────────────────────────────────────
+  # Frontend Service (Next.js) 
+  # ──────────────────────────────────────────────────────────
+  - type: web
+    name: airo-frontend
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: airo-backend
+          property: url
