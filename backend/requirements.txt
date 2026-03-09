@@ -35,8 +35,6 @@ pydantic==2.12.5
 pydantic-settings==2.13.1
 pydantic_core==2.41.5
 pymongo==4.16.0
-pyp==3.0.9
-PyPDF2==3.0.1
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.2
 python-http-client==3.3.7
@@ -57,10 +55,3 @@ urllib3==2.6.3
 uvicorn==0.41.0
 webencodings==0.5.1
 Werkzeug==3.1.6
-groq
-sentence-transformers
-scikit-learn
-spacy
-python-multipart
-python-jose[cryptography]
-passlib[bcrypt]

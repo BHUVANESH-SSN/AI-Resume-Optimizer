@@ -10,9 +10,7 @@ class AuthMiddleware(BaseHTTPMiddleware):
             "/auth",
             "/docs",
             "/openapi.json",
-            "/redoc",
-            "/favicon.ico",
-            "/"
+            "/redoc"
         )
 
         if request.url.path.startswith(public_paths):

@@ -7,16 +7,18 @@ from app.middlewares.rate_limit import RateLimitMiddleware
 
 from app.routes.auth_routes import auth_router
 from app.routes.form_routes import form_router
-from app.routes.resume_routes import resume_router
 
 app = FastAPI()
+
+@app.get("/")
+def health():
+    return {"status" : "running"}
 
 app.add_middleware(AuthMiddleware)
 app.add_middleware(RateLimitMiddleware)
 app.add_middleware(LoggingMiddleware)
-app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:3000", "https://airo-frontend.onrender.com", "https://airo-frontend-ab2u.onrender.com"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:3000"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
 
 app.include_router(auth_router)
 app.include_router(form_router)
-app.include_router(resume_router)
