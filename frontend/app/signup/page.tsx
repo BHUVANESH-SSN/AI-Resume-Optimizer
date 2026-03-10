@@ -62,6 +62,24 @@ const ShieldIcon = () => (
   </svg>
 );
 
+const PhoneIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+  </svg>
+);
+
+const LocIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
+  </svg>
+);
+
+const SchIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" /><path d="M10 6h4" /><path d="M10 10h4" /><path d="M10 14h4" />
+  </svg>
+);
+
 /* ─── Strength Indicator ─── */
 function StrengthMeter({ password }: { password: string }) {
   const strength = getStrength(password);
@@ -161,7 +179,15 @@ function Field({
 /* ─── Main Component ─── */
 export default function SignupPage() {
   const router = useRouter();
-  const [form, setForm] = useState({ full_name: '', email: '', password: '', confirm: '' });
+  const [form, setForm] = useState({
+    full_name: '',
+    email: '',
+    password: '',
+    confirm: '',
+    phone: '',
+    location: '',
+    institute: ''
+  });
   const [showPw, setShowPw] = useState(false);
   const [showC, setShowC] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -183,6 +209,9 @@ export default function SignupPage() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Enter a valid email address';
     if (!form.password) e.password = 'Password is required';
     else if (form.password.length < 8) e.password = 'Must be at least 8 characters';
+    if (!form.phone.trim()) e.phone = 'Phone number is required';
+    if (!form.location.trim()) e.location = 'Location is required';
+    if (!form.institute.trim()) e.institute = 'Institute is required';
     if (!form.confirm) e.confirm = 'Please confirm your password';
     else if (form.password !== form.confirm) e.confirm = 'Passwords do not match';
     setFieldErrors(e);
@@ -200,6 +229,9 @@ export default function SignupPage() {
         full_name: form.full_name,
         email: form.email,
         password: form.password,
+        phone: form.phone,
+        location: form.location,
+        institute: form.institute,
       }));
       router.push('/otp');
     } catch (err: unknown) {
@@ -382,6 +414,55 @@ export default function SignupPage() {
               value={form.email}
               onChange={e => set('email', e.target.value)}
               className={`form-input ${fieldErrors.email ? 'input-error' : !fieldErrors.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) ? 'border-green-400' : ''}`}
+              style={{ paddingLeft: 14 }}
+            />
+          </Field>
+
+          {/* Row: Phone & Location */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+            <Field
+              label="Phone Number"
+              icon={<PhoneIcon />}
+              error={fieldErrors.phone}
+            >
+              <input
+                type="tel"
+                placeholder="+1 234 567 890"
+                value={form.phone}
+                onChange={e => set('phone', e.target.value)}
+                className={`form-input ${fieldErrors.phone ? 'input-error' : ''}`}
+                style={{ paddingLeft: 14 }}
+              />
+            </Field>
+
+            <Field
+              label="City / Location"
+              icon={<LocIcon />}
+              error={fieldErrors.location}
+            >
+              <input
+                type="text"
+                placeholder="e.g. New York"
+                value={form.location}
+                onChange={e => set('location', e.target.value)}
+                className={`form-input ${fieldErrors.location ? 'input-error' : ''}`}
+                style={{ paddingLeft: 14 }}
+              />
+            </Field>
+          </div>
+
+          {/* Row: Institute */}
+          <Field
+            label="Educational Institute"
+            icon={<SchIcon />}
+            error={fieldErrors.institute}
+          >
+            <input
+              type="text"
+              placeholder="e.g. Stanford University"
+              value={form.institute}
+              onChange={e => set('institute', e.target.value)}
+              className={`form-input ${fieldErrors.institute ? 'input-error' : ''}`}
               style={{ paddingLeft: 14 }}
             />
           </Field>

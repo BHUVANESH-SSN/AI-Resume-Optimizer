@@ -344,7 +344,14 @@ export default function OTPPage() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [timer, setTimer] = useState(RESEND_SEC);
-  const [pending, setPending] = useState<{ full_name: string; email: string; password: string } | null>(null);
+  const [pending, setPending] = useState<{
+    full_name: string;
+    email: string;
+    password: string;
+    phone: string;
+    location: string;
+    institute: string;
+  } | null>(null);
   const refs = useRef<(HTMLInputElement | null)[]>([]);
   // hover state for verify button
   const [btnHover, setBtnHover] = useState(false);
@@ -400,6 +407,9 @@ export default function OTPPage() {
         full_name: pending.full_name,
         email: pending.email,
         password: pending.password,
+        phone: pending.phone,
+        location: pending.location,
+        institute: pending.institute,
         otp: code,
       });
       const loginData = await apiPost('/auth/login', {

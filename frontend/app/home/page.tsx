@@ -12,15 +12,13 @@ import {
   GraduationCap,
   Laptop2,
   LogOut,
-  MapPin,
   Package,
   Pencil,
   PencilLine,
-  Phone,
   Plus,
   Star,
   Trash2,
-  Trophy, Zap,
+  Trophy, Zap
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -33,7 +31,7 @@ interface Skill { name: string; category?: string; level?: number; }
 interface Experience { role?: string; company?: string; start_date?: string; end_date?: string; description?: string; }
 interface Achievement { title: string; description?: string; date?: string; }
 interface Profile {
-  full_name?: string; email?: string; phone?: string; location?: string;
+  full_name?: string; email?: string; phone?: string; location?: string; institute?: string;
   education?: Education[]; projects?: Project[]; skills?: Skill[];
   experience?: Experience[]; achievements?: Achievement[]; certifications?: Certification[];
 }
@@ -170,17 +168,31 @@ function Modal({ title, children, onClose }: { title: string; children: React.Re
   );
 }
 
-/* ── CONTACT MODAL ── */
-function ContactModal({ phone, location, onSave, onClose }: { phone: string; location: string; onSave: (p: string, l: string) => Promise<void>; onClose: () => void; }) {
-  const [p, setP] = useState(phone); const [l, setL] = useState(location); const [saving, setSaving] = useState(false);
+/* ── PROFILE MODAL ── */
+function ProfileModal({ data, onSave, onClose }: { data: Partial<Profile>; onSave: (p: Partial<Profile>) => Promise<void>; onClose: () => void; }) {
+  const [f, setF] = useState(data.full_name || '');
+  const [e, setE] = useState(data.email || '');
+  const [p, setP] = useState(data.phone || '');
+  const [l, setL] = useState(data.location || '');
+  const [i, setI] = useState(data.institute || '');
+  const [saving, setSaving] = useState(false);
+
   return (
-    <Modal title="Edit Contact Info" onClose={onClose}>
-      <div style={fg}><label style={mlbl}>Phone Number</label><input style={inp} placeholder="+91 9876543210" value={p} onChange={e => setP(e.target.value)} /></div>
-      <div style={fg}><label style={mlbl}>Location</label><input style={inp} placeholder="Chennai, Tamil Nadu" value={l} onChange={e => setL(e.target.value)} /></div>
-      <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 8 }}>
+    <Modal title="Edit Profile Details" onClose={onClose}>
+      <div style={fg}><label style={mlbl}>Full Name</label><input style={inp} placeholder="Alex Johnson" value={f} onChange={ev => setF(ev.target.value)} /></div>
+      <div style={fg}><label style={mlbl}>Email Address</label><input style={inp} placeholder="you@example.com" value={e} onChange={ev => setE(ev.target.value)} /></div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+        <div style={fg}><label style={mlbl}>Phone Number</label><input style={inp} placeholder="+1 234 567 890" value={p} onChange={ev => setP(ev.target.value)} /></div>
+        <div style={fg}><label style={mlbl}>City / Location</label><input style={inp} placeholder="New York, NY" value={l} onChange={ev => setL(ev.target.value)} /></div>
+      </div>
+
+      <div style={fg}><label style={mlbl}>Educational Institute</label><input style={inp} placeholder="Stanford University" value={i} onChange={ev => setI(ev.target.value)} /></div>
+
+      <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 12 }}>
         <button onClick={onClose} style={{ padding: '10px 24px', border: `1px solid ${C.border}`, borderRadius: 12, background: 'none', cursor: 'pointer', color: C.muted, fontFamily: 'Montserrat, sans-serif', fontSize: 14, fontWeight: 600 }}>Cancel</button>
-        <button onClick={async () => { setSaving(true); await onSave(p, l); setSaving(false); }} disabled={saving} style={{ padding: '10px 28px', background: C.accent, border: 'none', borderRadius: 12, color: '#fff', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: 14, cursor: 'pointer', boxShadow: `0 6px 20px ${C.accent}50` }}>
-          {saving ? 'Saving…' : 'Save'}
+        <button onClick={async () => { setSaving(true); await onSave({ full_name: f, email: e, phone: p, location: l, institute: i }); setSaving(false); }} disabled={saving} style={{ padding: '10px 28px', background: C.accent, border: 'none', borderRadius: 12, color: '#fff', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: 14, cursor: 'pointer', boxShadow: `0 6px 20px ${C.accent}50` }}>
+          {saving ? 'Saving…' : 'Save Changes'}
         </button>
       </div>
     </Modal>
@@ -406,22 +418,19 @@ export default function HomePage() {
         <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 800, fontSize: 18, color: C.ink, margin: '0 0 4px' }}>{displayName}</p>
         <p style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 12, color: C.muted, margin: '0 0 24px', wordBreak: 'break-all', lineHeight: 1.5 }}>{auth.email}</p>
 
-        {/* Location */}
-        <button onClick={() => setModal('contact')}
-          onMouseEnter={e => (e.currentTarget.style.borderColor = C.accent)}
-          onMouseLeave={e => (e.currentTarget.style.borderColor = C.border)}
-          style={{ display: 'flex', alignItems: 'center', gap: 9, width: '100%', background: 'none', border: `1.5px solid ${C.border}`, borderRadius: 12, padding: '10px 13px', fontSize: 13.5, color: profile?.location ? C.ink : C.muted, cursor: 'pointer', fontFamily: 'Montserrat, sans-serif', textAlign: 'left', marginBottom: 8, transition: 'border-color 0.2s' }}>
-          <MapPin size={16} color={C.muted} />
-          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{profile?.location || 'Add location'}</span>
-        </button>
+        {/* Institute */}
+        {profile?.institute && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 9, width: '100%', padding: '10px 13px', fontSize: 13.5, color: C.ink, fontFamily: 'Montserrat, sans-serif', textAlign: 'left', marginBottom: 24, background: 'rgba(124, 58, 237, 0.05)', borderRadius: 12, border: `1px solid ${C.accentSoft}` }}>
+            <Building2 size={16} color={C.accent} />
+            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 600 }}>{profile.institute}</span>
+          </div>
+        )}
 
-        {/* Phone */}
         <button onClick={() => setModal('contact')}
-          onMouseEnter={e => (e.currentTarget.style.borderColor = C.accent)}
-          onMouseLeave={e => (e.currentTarget.style.borderColor = C.border)}
-          style={{ display: 'flex', alignItems: 'center', gap: 9, width: '100%', background: 'none', border: `1.5px solid ${C.border}`, borderRadius: 12, padding: '10px 13px', fontSize: 13.5, color: profile?.phone ? C.ink : C.muted, cursor: 'pointer', fontFamily: 'Montserrat, sans-serif', textAlign: 'left', marginBottom: 32, transition: 'border-color 0.2s' }}>
-          <Phone size={16} color={C.muted} />
-          <span>{profile?.phone || 'Add phone'}</span>
+          onMouseEnter={e => { e.currentTarget.style.borderColor = C.accent; e.currentTarget.style.color = C.accent; }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.muted; }}
+          style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%', background: 'none', border: `1.5px solid ${C.border}`, borderRadius: 12, padding: '10px 13px', fontSize: 13, color: C.muted, cursor: 'pointer', fontFamily: 'Montserrat, sans-serif', fontWeight: 600, transition: 'all 0.2s', marginBottom: 8 }}>
+          <Pencil size={14} /> Edit Profile Info
         </button>
 
         <button onClick={logout}
@@ -436,13 +445,49 @@ export default function HomePage() {
       <main style={{ marginLeft: SIDEBAR_W, paddingTop: NAV_H, minHeight: '100vh' }}>
         <div style={{ padding: '56px 64px 110px' }}>
 
-          <h1 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 900, fontSize: 48, color: C.ink, margin: '0 0 10px', letterSpacing: '-2px', lineHeight: 1 }}>
-            My <span style={{ color: C.accent }}>Profile</span>
-          </h1>
-          <p style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 15, color: C.muted, margin: '0 0 56px', fontWeight: 500 }}>
-            Manage, update, and track all your profile information
-          </p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 48 }}>
+            <div>
+              <h1 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 900, fontSize: 48, color: C.ink, margin: '0 0 10px', letterSpacing: '-2px', lineHeight: 1 }}>
+                Welcome, <span style={{ color: C.accent }}>{displayName.split(' ')[0]}</span>
+              </h1>
+              <p style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 15, color: C.muted, margin: 0, fontWeight: 500 }}>
+                {new Date().getHours() < 12 ? 'Good morning! ' : new Date().getHours() < 18 ? 'Good afternoon! ' : 'Good evening! '}
+                Ready to land your next big role?
+              </p>
+            </div>
+            {/* AI Insights Panel */}
+            <div style={{ background: `linear-gradient(135deg, ${C.accent}, #9f67ff)`, borderRadius: 24, padding: '20px 24px', maxWidth: 320, color: '#fff', boxShadow: `0 12px 30px ${C.accent}40`, position: 'relative', overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', top: -10, right: -10, opacity: 0.1 }}><Zap size={100} /></div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+                <Zap size={18} />
+                <span style={{ fontSize: 13, fontWeight: 900, letterSpacing: 0.5 }}>AI INSIGHTS</span>
+              </div>
+              <p style={{ fontSize: 13, lineHeight: 1.5, fontWeight: 600, margin: 0 }}>
+                Your resume strength is <span style={{ textDecoration: 'underline' }}>Good</span>. Add a few more projects to reach the Top 5% of candidates.
+              </p>
+            </div>
+          </div>
 
+          {/* Quick Actions Grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 20, marginBottom: 66 }}>
+            {[
+              { title: 'Resume Builder', desc: 'Craft professional resumes', icon: <Plus size={24} />, route: '/resume', color: '#7c3aed' },
+              { title: 'Resume Optimizer', desc: 'Tailor for specific JDs', icon: <Zap size={24} />, route: '/resume', color: '#f97316' },
+              { title: 'DSA Practice', desc: 'Sharpen logic & algorithms', icon: <Star size={24} />, route: '/dsa', color: '#16a34a' },
+              { title: 'Dev Portfolio', desc: 'Analyze GitHub presence', icon: <Github size={24} />, route: '/development', color: '#06b6d4' },
+            ].map(act => (
+              <button key={act.title} onClick={() => router.push(act.route)}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = `0 15px 35px ${act.color}25`; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 4px 18px rgba(15,23,42,0.06)'; }}
+                style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 24, padding: '24px', textAlign: 'left', cursor: 'pointer', transition: 'all 0.3s cubic-bezier(.4,0,.2,1)', boxShadow: '0 4px 18px rgba(15,23,42,0.06)', display: 'flex', gap: 16, alignItems: 'center' }}>
+                <div style={{ width: 54, height: 54, borderRadius: 16, background: `${act.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: act.color, flexShrink: 0 }}>{act.icon}</div>
+                <div>
+                  <h3 style={{ margin: '0 0 4px', fontSize: 16, fontWeight: 800, color: C.ink, fontFamily: 'Montserrat, sans-serif' }}>{act.title}</h3>
+                  <p style={{ margin: 0, fontSize: 12, color: C.muted, fontWeight: 500, fontFamily: 'Montserrat, sans-serif' }}>{act.desc}</p>
+                </div>
+              </button>
+            ))}
+          </div>
           {loading ? (
             <div style={{ textAlign: 'center', padding: 100 }}>
               <span className="spinner" style={{ borderColor: `${C.accent}25`, borderTopColor: C.accent, width: 40, height: 40 }} />
@@ -615,9 +660,11 @@ export default function HomePage() {
       </main>
 
       {modal === 'contact' && (
-        <ContactModal phone={profile?.phone || ''} location={profile?.location || ''}
-          onSave={async (p, l) => { await patch({ phone: p, location: l }, 'Contact updated!'); }}
-          onClose={() => setModal(null)} />
+        <ProfileModal
+          data={profile || {}}
+          onSave={async (updates) => { await patch(updates, 'Profile updated!'); }}
+          onClose={() => setModal(null)}
+        />
       )}
       {modal === 'skills' && (
         <SkillsModal existing={profile?.skills ?? []}

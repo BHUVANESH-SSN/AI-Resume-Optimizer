@@ -8,13 +8,13 @@ import {
   Copy,
   Github,
   Globe,
-  LogOut, MapPin, Phone,
+  LogOut,
   RefreshCw,
   Star,
   TrendingUp,
   UserCheck,
   Users,
-  Zap,
+  Zap
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -30,6 +30,9 @@ interface GithubData {
 interface ContributionDay { date: string; count: number; level: 0 | 1 | 2 | 3 | 4; }
 interface ContributionWeek { days: ContributionDay[]; }
 interface ContributionData { total_contributions: number; weeks: ContributionWeek[]; }
+interface Profile {
+  full_name?: string; phone?: string; location?: string; institute?: string;
+}
 
 /* ── DESIGN SYSTEM ── */
 const C = {
@@ -175,26 +178,46 @@ function RepoCard({ repo }: { repo: RepoDetail }) {
   const langColor = repo.language ? getLangColor(repo.language) : C.muted;
   return (
     <div onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{ minWidth: 340, maxWidth: 340, flexShrink: 0, borderRadius: 20, background: `linear-gradient(90deg, ${C.accent}, ${C.accent}80) top / 100% 4px no-repeat, ${C.surface}`, border: `1px solid ${hov ? C.accent + '55' : C.border}`, boxShadow: hov ? '0 25px 60px rgba(15,23,42,0.14)' : '0 4px 18px rgba(15,23,42,0.07)', transform: hov ? 'translateY(-7px) scale(1.01)' : 'none', transition: 'all 0.3s cubic-bezier(.4,0,.2,1)', overflow: 'hidden', padding: '20px 22px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-        <BookOpen size={16} color={C.accent} />
-        <a href={repo.url} target="_blank" rel="noopener noreferrer" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 800, fontSize: 15, color: C.ink, textDecoration: 'none' }}>{repo.name}</a>
-      </div>
-      {repo.description && (
-        <p style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 13, color: C.muted, lineHeight: 1.6, margin: '0 0 16px', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{repo.description}</p>
-      )}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-        {repo.language && (
-          <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontFamily: 'Montserrat, sans-serif', fontSize: 12, fontWeight: 700, color: langColor }}>
-            <span style={{ width: 10, height: 10, borderRadius: '50%', background: langColor, display: 'inline-block' }} />{repo.language}
-          </span>
+      style={{
+        flex: 1,
+        minWidth: 'calc(33.333% - 16px)',
+        borderRadius: 24,
+        background: C.surface,
+        border: `1px solid ${hov ? C.accent + '40' : C.border}`,
+        boxShadow: hov ? '0 20px 40px rgba(15,23,42,0.1)' : '0 4px 12px rgba(15,23,42,0.04)',
+        transform: hov ? 'translateY(-5px)' : 'none',
+        transition: 'all 0.3s cubic-bezier(.4,0,.2,1)',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column'
+      }}>
+      <div style={{ padding: '24px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
+          <div style={{ width: 44, height: 44, borderRadius: 12, background: C.accentSoft, display: 'flex', alignItems: 'center', justifyContent: 'center', color: C.accent }}>
+            <BookOpen size={20} />
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 4, background: C.paper, padding: '4px 10px', borderRadius: 8, fontSize: 12, fontWeight: 700, color: C.muted }}>
+            <Star size={12} color="#f59e0b" fill="#f59e0b" /> {repo.stars}
+          </div>
+        </div>
+
+        <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 800, fontSize: 18, color: C.ink, margin: '0 0 10px', lineHeight: 1.4 }}>{repo.name}</h3>
+
+        {repo.description && (
+          <p style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 13.5, color: C.muted, lineHeight: 1.6, margin: '0 0 24px', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{repo.description}</p>
         )}
-        <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontFamily: 'Montserrat, sans-serif', fontSize: 12, color: C.muted, fontWeight: 600 }}>
-          <Star size={12} color="#f59e0b" fill="#f59e0b" /> {repo.stars}
-        </span>
-        <a href={repo.url} target="_blank" rel="noopener noreferrer" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: C.accent, fontFamily: 'Montserrat, sans-serif', fontWeight: 700, textDecoration: 'none' }}>
-          <Globe size={12} /> View
-        </a>
+
+        <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          {repo.language && (
+            <span style={{ display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Montserrat, sans-serif', fontSize: 12, fontWeight: 700, color: C.ink }}>
+              <span style={{ width: 8, height: 8, borderRadius: '50%', background: langColor }} />{repo.language}
+            </span>
+          )}
+          <a href={repo.url} target="_blank" rel="noopener noreferrer"
+            style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, background: hov ? C.accent : 'transparent', color: hov ? '#fff' : C.accent, border: `1.5px solid ${C.accent}`, padding: '8px 16px', borderRadius: 10, fontFamily: 'Montserrat, sans-serif', fontWeight: 700, textDecoration: 'none', transition: 'all 0.2s' }}>
+            <Github size={14} /> Visit
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -320,28 +343,60 @@ function TopLanguages({ languages }: { languages: string[] }) {
   );
 }
 
-/* ── REPOS SECTION — named component so hook runs at component top level ── */
+/* ── REPOS SECTION ── */
 function ReposSection({ github }: { github: GithubData }) {
   const reveal = useScrollReveal(0);
-  const sorted = [...github.repo_details].sort((a, b) => b.stars - a.stars);
+  const [search, setSearch] = useState('');
+  const [filterLang, setFilterLang] = useState('All');
+
+  const repos = github.repo_details;
+  const langs = ['All', ...Array.from(new Set(repos.map(r => r.language).filter(Boolean)))];
+
+  const filtered = repos
+    .filter(r => (filterLang === 'All' || r.language === filterLang))
+    .filter(r => r.name.toLowerCase().includes(search.toLowerCase()) || r.description?.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => b.stars - a.stars);
+
   return (
     <div ref={reveal.ref} style={reveal.style}>
-      <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 24 }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 32, gap: 24, flexWrap: 'wrap' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
             <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 900, fontSize: 28, color: C.ink, margin: 0, letterSpacing: '-0.5px' }}>Repositories</h2>
-            <span style={{ minWidth: 28, height: 28, borderRadius: 14, background: `linear-gradient(135deg, ${C.accent}, #9f67ff)`, color: '#fff', fontFamily: 'Montserrat, sans-serif', fontWeight: 800, fontSize: 12, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '0 8px', boxShadow: `0 4px 12px ${C.accent}40` }}>{github.repo_details.length}</span>
+            <span style={{ minWidth: 28, height: 28, borderRadius: 14, background: `linear-gradient(135deg, ${C.accent}, #9f67ff)`, color: '#fff', fontFamily: 'Montserrat, sans-serif', fontWeight: 800, fontSize: 12, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '0 8px', boxShadow: `0 4px 12px ${C.accent}40` }}>{repos.length}</span>
           </div>
-          <p style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 14, color: C.muted, margin: 0 }}>Your public repositories, sorted by stars</p>
+          <p style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 14, color: C.muted, margin: 0 }}>Discover your public work and contributions</p>
         </div>
-        <a href={`https://github.com/${github.username}?tab=repositories`} target="_blank" rel="noopener noreferrer"
-          style={{ display: 'flex', alignItems: 'center', gap: 6, background: C.accent, color: '#fff', borderRadius: 14, padding: '12px 24px', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: 13.5, textDecoration: 'none', boxShadow: `0 6px 20px ${C.accent}40` }}>
-          <Github size={15} /> View All
-        </a>
+
+        <div style={{ display: 'flex', gap: 12, flex: 1, maxWidth: 500 }}>
+          <div style={{ position: 'relative', flex: 1 }}>
+            <input
+              style={{ width: '100%', padding: '12px 16px 12px 40px', borderRadius: 12, border: `1px solid ${C.border}`, fontFamily: 'Montserrat, sans-serif', fontSize: 14 }}
+              placeholder="Search repositories..."
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+            <Globe size={18} color={C.muted} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)' }} />
+          </div>
+          <select
+            style={{ padding: '0 12px', borderRadius: 12, border: `1px solid ${C.border}`, background: C.surface, fontFamily: 'Montserrat, sans-serif', fontSize: 13, fontWeight: 600, color: C.ink, cursor: 'pointer', outline: 'none' }}
+            value={filterLang}
+            onChange={e => setFilterLang(e.target.value)}
+          >
+            {langs.map(l => <option key={l!} value={l!}>{l}</option>)}
+          </select>
+        </div>
       </div>
-      <div style={{ display: 'flex', gap: 22, overflowX: 'auto', padding: '14px 0 20px', scrollbarWidth: 'none', overflowY: 'visible' }}>
-        {sorted.map((repo, i) => <RepoCard key={i} repo={repo} />)}
-      </div>
+
+      {filtered.length > 0 ? (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 20 }}>
+          {filtered.map((repo, i) => <RepoCard key={i} repo={repo} />)}
+        </div>
+      ) : (
+        <div style={{ padding: '60px 0', textAlign: 'center', background: C.paper, borderRadius: 24, border: `2px dashed ${C.border}` }}>
+          <p style={{ fontSize: 16, color: C.muted, fontWeight: 600, fontFamily: 'Montserrat, sans-serif' }}>No repositories found matching your current filters.</p>
+        </div>
+      )}
     </div>
   );
 }
@@ -436,12 +491,12 @@ export default function DevelopmentPage() {
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
   const [toast, setToast] = useState<{ msg: string; type: 'success' | 'error' } | null>(null);
-  const [profile, setProfile] = useState<{ full_name?: string; phone?: string; location?: string } | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
 
   const fetchData = useCallback(async (email: string) => {
     try {
       const data = await apiGet(`/form/get-profile/${encodeURIComponent(email)}`);
-      setProfile({ full_name: data.full_name, phone: data.phone, location: data.location });
+      setProfile({ full_name: data.full_name, phone: data.phone, location: data.location, institute: data.institute });
       if (data.github) setGithub(data.github);
     } catch { }
   }, []);
@@ -498,16 +553,10 @@ export default function DevelopmentPage() {
             <Github size={14} /> @{github.username}
           </a>
         )}
-        {profile?.location && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 8, color: C.muted, fontSize: 13.5 }}>
-            <MapPin size={15} color={C.muted} />
-            <span style={{ fontFamily: 'Montserrat, sans-serif', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{profile.location}</span>
-          </div>
-        )}
-        {profile?.phone && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 24, color: C.muted, fontSize: 13.5 }}>
-            <Phone size={15} color={C.muted} />
-            <span style={{ fontFamily: 'Montserrat, sans-serif' }}>{profile.phone}</span>
+        {profile?.institute && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 9, width: '100%', padding: '10px 13px', fontSize: 13, color: C.ink, fontFamily: 'Montserrat, sans-serif', textAlign: 'left', marginBottom: 24, background: 'rgba(124, 58, 237, 0.05)', borderRadius: 12, border: `1px solid ${C.accentSoft}` }}>
+            <Building2 size={16} color={C.accent} />
+            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 600 }}>{profile.institute}</span>
           </div>
         )}
         {github && (
