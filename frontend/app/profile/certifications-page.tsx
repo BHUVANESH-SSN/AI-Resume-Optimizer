@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Navbar } from '@/components/Navbar';
+import { apiGet, apiPatch, getAuth } from '@/lib/api';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { getAuth, apiGet, apiPatch } from '@/lib/api';
-import { Navbar } from '@/app/home/page';
+import { useEffect, useState } from 'react';
 
 interface CertEntry {
   title: string;
@@ -25,19 +25,19 @@ function Toast({ msg, type, onClose }: { msg: string; type: 'success' | 'error';
 
 function serverToForm(c: Record<string, unknown>): CertEntry {
   return {
-    title:      String(c.title      ?? ''),
-    issuer:     String(c.issuer     ?? ''),
+    title: String(c.title ?? ''),
+    issuer: String(c.issuer ?? ''),
     issue_date: c.issue_date ? String(c.issue_date).substring(0, 10) : '',
-    link:       String(c.link       ?? ''),
+    link: String(c.link ?? ''),
   };
 }
 
 function formToServer(e: CertEntry) {
   return {
-    title:      e.title      || null,
-    issuer:     e.issuer     || null,
+    title: e.title || null,
+    issuer: e.issuer || null,
     issue_date: e.issue_date ? new Date(e.issue_date).toISOString() : null,
-    link:       e.link       || null,
+    link: e.link || null,
   };
 }
 
@@ -45,18 +45,18 @@ const inp: React.CSSProperties = { width: '100%', padding: '10px 14px', borderRa
 const lbl: React.CSSProperties = { fontSize: 12.5, fontWeight: 600, color: '#6b7280', display: 'block', marginBottom: 5, fontFamily: 'Montserrat,sans-serif' };
 
 export default function CertificationsPage() {
-  const router       = useRouter();
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const editParam    = searchParams.get('edit');
-  const editIdx      = editParam !== null ? parseInt(editParam) : null;
-  const isEditMode   = editIdx !== null;
+  const editParam = searchParams.get('edit');
+  const editIdx = editParam !== null ? parseInt(editParam) : null;
+  const isEditMode = editIdx !== null;
 
   const [allCerts, setAllCerts] = useState<CertEntry[]>([]);
-  const [entries,  setEntries]  = useState<CertEntry[]>([{ ...EMPTY }]);
-  const [errors,   setErrors]   = useState<Partial<CertEntry>[]>([{}]);
-  const [loading,  setLoading]  = useState(false);
+  const [entries, setEntries] = useState<CertEntry[]>([{ ...EMPTY }]);
+  const [errors, setErrors] = useState<Partial<CertEntry>[]>([{}]);
+  const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
-  const [toast,    setToast]    = useState<{ msg: string; type: 'success' | 'error' } | null>(null);
+  const [toast, setToast] = useState<{ msg: string; type: 'success' | 'error' } | null>(null);
 
   useEffect(() => {
     const auth = getAuth();
@@ -69,19 +69,19 @@ export default function CertificationsPage() {
           if (editIdx !== null && formatted[editIdx]) setEntries([{ ...formatted[editIdx] }]);
         }
       })
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setFetching(false));
   }, [router, editIdx]);
 
   function change(i: number, field: keyof CertEntry, val: string) {
     setEntries(prev => { const n = [...prev]; n[i] = { ...n[i], [field]: val }; return n; });
-    setErrors(prev  => { const n = [...prev]; n[i] = { ...n[i], [field]: '' };  return n; });
+    setErrors(prev => { const n = [...prev]; n[i] = { ...n[i], [field]: '' }; return n; });
   }
 
   function validate() {
     const errs = entries.map(e => {
       const obj: Partial<CertEntry> = {};
-      if (!e.title.trim())  obj.title  = 'Required';
+      if (!e.title.trim()) obj.title = 'Required';
       if (!e.issuer.trim()) obj.issuer = 'Required';
       return obj;
     });
