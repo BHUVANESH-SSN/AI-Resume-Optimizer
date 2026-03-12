@@ -50,7 +50,7 @@ function Navbar({ active }: { active?: string }) {
           <polyline points="8 7 2 12 8 17" />
           <polyline points="16 7 22 12 16 17" />
         </svg>
-        <span style={{ fontFamily: "'Fira Code', monospace", fontWeight: 900, fontSize: '18px', letterSpacing: '-0.5px', color: '#0d0d14', display: 'flex', alignItems: 'baseline', lineHeight: 1 }}>
+        <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 900, fontSize: '18px', letterSpacing: '-0.5px', color: '#0d0d14', display: 'flex', alignItems: 'baseline', lineHeight: 1 }}>
           AIRO<div style={{ width: '6px', height: '6px', backgroundColor: '#7c3aed', marginLeft: '4px' }} />
         </span>
       </div>
@@ -59,7 +59,7 @@ function Navbar({ active }: { active?: string }) {
           <button key={label} onClick={() => {
             const path = label === 'Dashboard' ? '/home' : label === 'Development' ? '/development' : label === 'Resume Builder' ? '/resume' : label === 'DSA' ? '/dsa' : label === 'Predict' ? '/predict' : '/career-coach';
             router.push(path);
-          }} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: "'Fira Code', monospace", fontSize: 14, color: active === label ? C.accent : C.muted, fontWeight: active === label ? 700 : 500, borderBottom: active === label ? `2.5px solid ${C.accent}` : '2.5px solid transparent', paddingBottom: 4, transition: 'all 0.2s' }}>
+          }} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", fontSize: 14, color: active === label ? C.accent : C.muted, fontWeight: active === label ? 700 : 500, borderBottom: active === label ? `2.5px solid ${C.accent}` : '2.5px solid transparent', paddingBottom: 4, transition: 'all 0.2s' }}>
             {label}
           </button>
         ))}
@@ -126,10 +126,10 @@ function CreateMode({ auth }: { auth: Auth | null }) {
           <User size={20} color="#fff" />
         </div>
         <div>
-          <p style={{ fontFamily: "'Fira Code', monospace", fontWeight: 700, fontSize: 14, color: C.ink, margin: '0 0 4px' }}>
+          <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: 14, color: C.ink, margin: '0 0 4px' }}>
             Using your dashboard profile
           </p>
-          <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 13, color: C.muted, margin: 0 }}>
+          <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, color: C.muted, margin: 0 }}>
             We&apos;ll pull your education, skills, experience and projects from your saved profile to generate an ATS-friendly LaTeX resume.
             Optionally upload your existing resume file below to use that instead.
           </p>
@@ -138,7 +138,7 @@ function CreateMode({ auth }: { auth: Auth | null }) {
 
       {/* Optional resume file upload */}
       <div>
-        <label style={{ fontFamily: "'Fira Code', monospace", fontSize: 12.5, fontWeight: 700, color: C.ink, marginBottom: 10, display: 'block', letterSpacing: '0.3px' }}>
+        <label style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 12.5, fontWeight: 700, color: C.ink, marginBottom: 10, display: 'block', letterSpacing: '0.3px' }}>
           Override with existing resume (optional — PDF or DOCX)
         </label>
         <input ref={fileRef} type="file" accept=".pdf,.docx" style={{ display: 'none' }}
@@ -166,15 +166,15 @@ function CreateMode({ auth }: { auth: Auth | null }) {
           </div>
           {resumeFile ? (
             <div>
-              <p style={{ fontFamily: "'Fira Code', monospace", fontWeight: 700, fontSize: 14, color: C.ink, margin: 0 }}>{resumeFile.name}</p>
-              <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 12, color: C.success, margin: '3px 0 0', fontWeight: 600 }}>Will be parsed automatically</p>
+              <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: 14, color: C.ink, margin: 0 }}>{resumeFile.name}</p>
+              <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 12, color: C.success, margin: '3px 0 0', fontWeight: 600 }}>Will be parsed automatically</p>
             </div>
           ) : (
             <div>
-              <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 14, color: C.muted, margin: 0 }}>
+              <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 14, color: C.muted, margin: 0 }}>
                 Drop a <strong style={{ color: C.ink }}>.pdf</strong> or <strong style={{ color: C.ink }}>.docx</strong> here, or click to browse
               </p>
-              <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 12, color: C.muted, margin: '3px 0 0' }}>Leave empty to use your dashboard profile</p>
+              <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 12, color: C.muted, margin: '3px 0 0' }}>Leave empty to use your dashboard profile</p>
             </div>
           )}
           {resumeFile && (
@@ -185,7 +185,7 @@ function CreateMode({ auth }: { auth: Auth | null }) {
       </div>
 
       {error && (
-        <div style={{ background: '#fff0f0', border: `1px solid ${C.accent2}40`, borderRadius: 12, padding: '12px 16px', color: C.accent2, fontSize: 13.5, fontFamily: "'Fira Code', monospace", fontWeight: 600 }}>
+        <div style={{ background: '#fff0f0', border: `1px solid ${C.accent2}40`, borderRadius: 12, padding: '12px 16px', color: C.accent2, fontSize: 13.5, fontFamily: "'Montserrat', sans-serif", fontWeight: 600 }}>
           ⚠️ {error}
         </div>
       )}
@@ -195,7 +195,7 @@ function CreateMode({ auth }: { auth: Auth | null }) {
         disabled={isGenerating}
         style={{
           width: '100%', padding: 16, background: isGenerating ? 'rgba(167,139,250,0.6)' : 'linear-gradient(135deg, #A78BFA 0%, #6c47ff 50%, #1a1a2e 100%)', color: '#fff',
-          border: 'none', borderRadius: 14, fontFamily: "'Fira Code', monospace", fontWeight: 700,
+          border: 'none', borderRadius: 14, fontFamily: "'Montserrat', sans-serif", fontWeight: 700,
           fontSize: 15, cursor: isGenerating ? 'not-allowed' : 'pointer', transition: 'all 0.2s',
           boxShadow: `0 4px 20px ${C.accent}35`, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
         }}
@@ -262,7 +262,7 @@ const Index = () => {
   const initials = displayName.split(' ').map((w: string) => w[0]).join('').toUpperCase().slice(0, 2);
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg,#f8fafc 0%,#eef2ff 60%,#f5f3ff 100%)', fontFamily: "'Fira Code', monospace" }}>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg,#f8fafc 0%,#eef2ff 60%,#f5f3ff 100%)', fontFamily: "'Montserrat', sans-serif" }}>
       <Navbar active="Resume Builder" />
 
       {/* SIDEBAR */}
@@ -301,7 +301,7 @@ const Index = () => {
             width: sbHover ? '100%' : 44, height: 44, display: 'flex', alignItems: 'center',
             gap: 12, justifyContent: sbHover ? 'flex-start' : 'center', background: 'none',
             border: `1.5px solid ${C.border}`, borderRadius: 12, padding: sbHover ? '10px 14px' : '0',
-            fontFamily: "'Fira Code', monospace", fontSize: 13.5, fontWeight: 600, cursor: 'pointer',
+            fontFamily: "'Montserrat', sans-serif", fontSize: 13.5, fontWeight: 600, cursor: 'pointer',
             color: C.muted, transition: 'all 0.2s', flexShrink: 0
           }} title={!sbHover ? 'Logout' : ''}>
           <LogOut size={18} />
@@ -339,7 +339,7 @@ const Index = () => {
                   display: 'flex', alignItems: 'center', gap: 12, padding: '14px 24px',
                   borderRadius: 16, border: `2px solid ${mode === key ? C.accent : C.border}`,
                   background: mode === key ? C.accentSoft : C.surface,
-                  cursor: 'pointer', transition: 'all 0.2s', fontFamily: "'Fira Code', monospace",
+                  cursor: 'pointer', transition: 'all 0.2s', fontFamily: "'Montserrat', sans-serif",
                   boxShadow: mode === key ? `0 4px 16px ${C.accent}20` : 'none',
                 }}
               >

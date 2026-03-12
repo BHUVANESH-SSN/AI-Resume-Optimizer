@@ -21,7 +21,7 @@ export function AuthRight() {
 
       <div className="relative z-10">
         <h2 className="font-extrabold leading-[1.15] tracking-[-1.5px] mb-3.5 drop-shadow-sm transition-all duration-500 group-hover:tracking-[-2px]" style={{
-          fontFamily: "'Fira Code', monospace",
+          fontFamily: "'Montserrat', sans-serif",
           fontSize: '42px',
           color: 'white',
           fontWeight: 800,
@@ -58,7 +58,7 @@ export function AuthRight() {
           ].map((stat, i) => (
             <div key={i} className="text-center group-hover:scale-105 transition-transform duration-300">
               <div className="font-extrabold tracking-[-1px]" style={{
-                fontFamily: "'Fira Code', monospace",
+                fontFamily: "'Montserrat', sans-serif",
                 fontSize: '24px',
                 color: 'white',
                 fontWeight: 800,
@@ -80,7 +80,7 @@ export function AiroLogo() {
         <polyline points="16 7 22 12 16 17" />
       </svg>
       <span style={{
-        fontFamily: "'Fira Code', monospace",
+        fontFamily: "'Montserrat', sans-serif",
         fontWeight: 900,
         fontSize: '28px',
         letterSpacing: '-0.5px',

@@ -6,7 +6,7 @@ const S = {
         minHeight: '100vh',
         background: 'var(--paper)',
         color: 'var(--ink)',
-        fontFamily: "'Fira Code', monospace",
+        fontFamily: "'Montserrat', sans-serif",
         overflowX: 'hidden' as const,
     },
     nav: {
