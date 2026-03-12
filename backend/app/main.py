@@ -11,7 +11,9 @@ Routers registered:
   /coach   — (legacy, replaced by /chatbot)
   /chatbot — resuMate Chatbot (SSE streaming analysis + follow-up chat)
 """
+from dotenv import load_dotenv
 
+load_dotenv()
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -39,7 +41,8 @@ app.add_middleware(LoggingMiddleware)
 app.add_middleware(RateLimitMiddleware)
 app.add_middleware(AuthMiddleware)
 app.add_middleware(CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000","http://localhost:5000",
+    "http://127.0.0.1:5000",],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -53,7 +56,6 @@ app.include_router(resume_router)  # /api/extract, /api/download, /resume/*
 app.include_router(predict_router) # /predict
 app.include_router(coach_router)   # /coach (legacy)
 app.include_router(chatbot_router) # /chatbot
-
 
 # ── Health Check ─────────────────────────────────────────────────────────────
 @app.get("/", tags=["Health"])

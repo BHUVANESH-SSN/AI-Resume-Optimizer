@@ -96,6 +96,17 @@ export default function LoginPage() {
     }
   }
 
+  // ✅ FIXED: Redirect to backend OAuth endpoint, NOT directly to OAuth provider
+  function handleGoogleLogin() {
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+    window.location.href = `${backendUrl}/auth/oauth/google/login`;
+  }
+
+  function handleGithubLogin() {
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+    window.location.href = `${backendUrl}/auth/oauth/github/login`;
+  }
+
   function set(field: string, value: string) {
     setForm(f => ({ ...f, [field]: value }));
     if (fieldErrors[field]) setFieldErrors(fe => ({ ...fe, [field]: '' }));
@@ -143,6 +154,7 @@ export default function LoginPage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
             <button
               type="button"
+              onClick={handleGoogleLogin}
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '11px 16px',
                 border: '1.5px solid #e5e4ef', borderRadius: 12, background: 'white', fontSize: 13.5, fontWeight: 700,
@@ -168,6 +180,7 @@ export default function LoginPage() {
             </button>
             <button
               type="button"
+              onClick={handleGithubLogin}
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '11px 16px',
                 border: '1.5px solid #e5e4ef', borderRadius: 12, background: 'white', fontSize: 13.5, fontWeight: 700,
