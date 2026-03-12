@@ -1,6 +1,8 @@
 'use client';
 
 import { apiGet, apiPatch, apiPostAuth, clearAuth, getAuth } from '@/lib/api';
+import { Navbar } from '@/components/Navbar';
+import { apiGet, apiPostAuth, clearAuth, getAuth } from '@/lib/api';
 import {
   Award,
   CheckCircle2,

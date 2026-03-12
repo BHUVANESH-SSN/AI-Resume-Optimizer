@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Navbar } from '@/components/Navbar';
+import { apiGet, apiPatch, getAuth } from '@/lib/api';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { getAuth, apiGet, apiPatch } from '@/lib/api';
-import { Navbar } from '@/app/home/page';
+import { useEffect, useState } from 'react';
 
 interface EducationEntry {
   degree: string; branch: string; institution: string;
@@ -32,9 +32,12 @@ function Toast({ msg, type, onClose }: { msg: string; type: 'success' | 'error';
  */
 function serverToForm(e: Record<string, unknown>): EducationEntry {
   return {
-    degree:      String(e.degree      ?? ''),
-    branch:      String(e.branch      ?? ''),
+    degree: String(e.degree ?? ''),
+    branch: String(e.branch ?? ''),
     institution: String(e.institution ?? ''),
+    cgpa: e.cgpa != null ? String(e.cgpa) : '',
+    start_year: e.start_year != null ? String(e.start_year) : '',
+    end_year: e.end_year != null ? String(e.end_year) : 'Present',
     cgpa:        e.cgpa  != null ? String(e.cgpa)       : '',
     start_year:  e.start_year != null ? String(e.start_year) : '',
     end_year:    e.end_year   != null ? String(e.end_year)   : 'Present',
@@ -48,28 +51,28 @@ function serverToForm(e: Record<string, unknown>): EducationEntry {
  */
 function formToServer(e: EducationEntry) {
   return {
-    degree:      e.degree,
-    branch:      e.branch,
+    degree: e.degree,
+    branch: e.branch,
     institution: e.institution,
-    ...(e.cgpa       ? { cgpa:       parseFloat(e.cgpa)       } : {}),
-    ...(e.start_year ? { start_year: parseInt(e.start_year)   } : {}),
+    ...(e.cgpa ? { cgpa: parseFloat(e.cgpa) } : {}),
+    ...(e.start_year ? { start_year: parseInt(e.start_year) } : {}),
     end_year: (e.end_year === 'Present' || !e.end_year) ? null : parseInt(e.end_year),
     backlogs: e.backlogs ? parseInt(e.backlogs) : 0,
   };
 }
 
 export default function EducationPage() {
-  const router       = useRouter();
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const editParam    = searchParams.get('edit');
-  const editIdx      = editParam !== null ? parseInt(editParam) : null;
-  const isEditMode   = editIdx !== null;
+  const editParam = searchParams.get('edit');
+  const editIdx = editParam !== null ? parseInt(editParam) : null;
+  const isEditMode = editIdx !== null;
 
   const [allEducation, setAllEducation] = useState<EducationEntry[]>([]);
-  const [entries, setEntries]   = useState<EducationEntry[]>([{ ...EMPTY }]);
-  const [errors,  setErrors]    = useState<Partial<EducationEntry>[]>([{}]);
-  const [loading, setLoading]   = useState(false);
-  const [toast,   setToast]     = useState<{ msg: string; type: 'success' | 'error' } | null>(null);
+  const [entries, setEntries] = useState<EducationEntry[]>([{ ...EMPTY }]);
+  const [errors, setErrors] = useState<Partial<EducationEntry>[]>([{}]);
+  const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState<{ msg: string; type: 'success' | 'error' } | null>(null);
 
   useEffect(() => {
     const auth = getAuth();
@@ -85,12 +88,12 @@ export default function EducationPage() {
           }
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, [router, editIdx, isEditMode]);
 
   function change(i: number, field: keyof EducationEntry, val: string) {
     setEntries(prev => { const n = [...prev]; n[i] = { ...n[i], [field]: val }; return n; });
-    setErrors(prev  => { const n = [...prev]; n[i] = { ...n[i], [field]: ''  }; return n; });
+    setErrors(prev => { const n = [...prev]; n[i] = { ...n[i], [field]: '' }; return n; });
   }
 
   function validate() {

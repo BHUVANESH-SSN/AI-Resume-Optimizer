@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Navbar } from '@/components/Navbar';
+import { apiGet, apiPatch, getAuth } from '@/lib/api';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { getAuth, apiGet, apiPatch } from '@/lib/api';
-import { Navbar } from '@/app/home/page';
+import { useEffect, useState } from 'react';
 
 interface ProjectEntry {
   title: string; description: string;
@@ -23,21 +23,21 @@ function Toast({ msg, type, onClose }: { msg: string; type: 'success' | 'error';
 
 function serverToForm(p: Record<string, unknown>): ProjectEntry {
   return {
-    title:       String(p.title       ?? ''),
+    title: String(p.title ?? ''),
     description: String(p.description ?? ''),
-    tech_stack:  Array.isArray(p.tech_stack) ? (p.tech_stack as string[]).join(', ') : '',
+    tech_stack: Array.isArray(p.tech_stack) ? (p.tech_stack as string[]).join(', ') : '',
     github_link: String(p.github_link ?? ''),
-    live_link:   String(p.live_link   ?? ''),
+    live_link: String(p.live_link ?? ''),
   };
 }
 
 function formToServer(e: ProjectEntry) {
   return {
-    title:       e.title,
+    title: e.title,
     description: e.description,
-    ...(e.tech_stack  ? { tech_stack:  e.tech_stack.split(',').map(t => t.trim()).filter(Boolean) } : {}),
+    ...(e.tech_stack ? { tech_stack: e.tech_stack.split(',').map(t => t.trim()).filter(Boolean) } : {}),
     ...(e.github_link ? { github_link: e.github_link } : {}),
-    ...(e.live_link   ? { live_link:   e.live_link   } : {}),
+    ...(e.live_link ? { live_link: e.live_link } : {}),
   };
 }
 
@@ -45,18 +45,18 @@ const inp: React.CSSProperties = { width: '100%', padding: '10px 14px', borderRa
 const lbl: React.CSSProperties = { fontSize: 12.5, fontWeight: 600, color: '#6b7280', display: 'block', marginBottom: 5, fontFamily: "'Fira Code', monospace" };
 
 export default function ProjectsPage() {
-  const router       = useRouter();
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const editParam    = searchParams.get('edit');
-  const editIdx      = editParam !== null ? parseInt(editParam) : null;
-  const isEditMode   = editIdx !== null;
+  const editParam = searchParams.get('edit');
+  const editIdx = editParam !== null ? parseInt(editParam) : null;
+  const isEditMode = editIdx !== null;
 
   const [allProjects, setAllProjects] = useState<ProjectEntry[]>([]);
-  const [entries,  setEntries]  = useState<ProjectEntry[]>([{ ...EMPTY }]);
-  const [errors,   setErrors]   = useState<Partial<ProjectEntry>[]>([{}]);
-  const [loading,  setLoading]  = useState(false);
+  const [entries, setEntries] = useState<ProjectEntry[]>([{ ...EMPTY }]);
+  const [errors, setErrors] = useState<Partial<ProjectEntry>[]>([{}]);
+  const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
-  const [toast,    setToast]    = useState<{ msg: string; type: 'success' | 'error' } | null>(null);
+  const [toast, setToast] = useState<{ msg: string; type: 'success' | 'error' } | null>(null);
 
   useEffect(() => {
     const auth = getAuth();
@@ -71,19 +71,19 @@ export default function ProjectsPage() {
           }
         }
       })
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setFetching(false));
   }, [router, editIdx]);
 
   function change(i: number, field: keyof ProjectEntry, val: string) {
     setEntries(prev => { const n = [...prev]; n[i] = { ...n[i], [field]: val }; return n; });
-    setErrors(prev  => { const n = [...prev]; n[i] = { ...n[i], [field]: '' };  return n; });
+    setErrors(prev => { const n = [...prev]; n[i] = { ...n[i], [field]: '' }; return n; });
   }
 
   function validate() {
     const errs = entries.map(e => {
       const obj: Partial<ProjectEntry> = {};
-      if (!e.title.trim())       obj.title       = 'Required';
+      if (!e.title.trim()) obj.title = 'Required';
       if (!e.description.trim()) obj.description = 'Required';
       return obj;
     });

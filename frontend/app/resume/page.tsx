@@ -4,6 +4,7 @@ import AtsScoreCard from "@/components/AtsScoreCard";
 import GeneratedResume from "@/components/GeneratedResume";
 import Heatmap from "@/components/Heatmap";
 import JDSection from "@/components/JDSection";
+import { Navbar } from "@/components/Navbar";
 import SkillGap from "@/components/SkillGap";
 import { apiGet, clearAuth, getAuth } from "@/lib/api";
 import {
