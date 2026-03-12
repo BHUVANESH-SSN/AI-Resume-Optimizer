@@ -84,7 +84,7 @@ function CreateMode({ auth }: { auth: Auth | null }) {
       const formData = new FormData();
       if (resumeFile) formData.append("resume_file", resumeFile);
 
-      const backendUrl = process.env.NEXT_PUBLIC_JD_BACKEND_URL || "http://localhost:8000";
+      const backendUrl = process.env.NEXT_PUBLIC_JD_BACKEND_URL || "http://localhost:5000";
       const res = await fetch(`${backendUrl}/api/create`, {
         method: "POST",
         headers: {

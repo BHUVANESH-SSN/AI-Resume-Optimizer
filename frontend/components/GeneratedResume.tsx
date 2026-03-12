@@ -33,7 +33,7 @@ const GeneratedResume = ({ resumeData, pdfPath, onRegenerate }: GeneratedResumeP
             onClick={async () => {
               if (!pdfPath) return;
               try {
-                const backendUrl = process.env.NEXT_PUBLIC_JD_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+                const backendUrl = process.env.NEXT_PUBLIC_JD_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
                 const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
                 const res = await fetch(`${backendUrl}/api/download?path=${encodeURIComponent(pdfPath)}`, {
                   headers: token ? { Authorization: `Bearer ${token}` } : {},
