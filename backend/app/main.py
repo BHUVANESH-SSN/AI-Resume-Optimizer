@@ -24,6 +24,8 @@ from app.middlewares.rate_limit import RateLimitMiddleware
 from app.routes.auth_routes import auth_router
 from app.routes.form_routes import form_router
 from app.routes.dev_routes import dev_router        # NEW: developer integrations
+from app.routes.resume_routes import resume_router
+from app.routes.roadmap_routes import roadmap_router  # FIX: was never registered
 from app.routes.resume_routes import resume_router  # FIX: was never registered
 from app.routes.predict_routes import predict_router  # ML placement prediction
 from app.routes.chatbot_routes import chatbot_router   # Nova AI Career Coach
@@ -50,6 +52,9 @@ app.add_middleware(CORSMiddleware,
 app.include_router(auth_router)    # /auth/*
 app.include_router(form_router)    # /form/*
 app.include_router(dev_router)     # /dev/*
+app.include_router(resume_router)
+app.include_router(roadmap_router)  # /api/extract, /api/download, /resume/*
+
 app.include_router(resume_router)  # /api/extract, /api/download, /resume/*
 app.include_router(predict_router) # /predict
 app.include_router(chatbot_router) # /chatbot
