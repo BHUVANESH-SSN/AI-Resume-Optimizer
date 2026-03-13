@@ -106,7 +106,7 @@ export function Navbar({ active }: { active?: string }) {
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="8 7 2 12 8 17" /><polyline points="16 7 22 12 16 17" />
         </svg>
-        <span style={{ fontFamily: "'Fira Code', monospace", fontWeight: 900, fontSize: '18px', letterSpacing: '-0.5px', color: '#0d0d14', display: 'flex', alignItems: 'baseline', lineHeight: 1 }}>
+        <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 900, fontSize: '18px', letterSpacing: '-0.5px', color: '#0d0d14', display: 'flex', alignItems: 'baseline', lineHeight: 1 }}>
           AIRO<div style={{ width: '6px', height: '6px', backgroundColor: '#7c3aed', marginLeft: '4px' }} />
         </span>
       </div>
@@ -119,7 +119,7 @@ export function Navbar({ active }: { active?: string }) {
             if (label === 'DSA') router.push('/dsa');
             if (label === 'Predict') router.push('/predict');
             if (label === 'Nova AI') router.push('/career-coach');
-          }} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: "'Fira Code', monospace", fontSize: 14, color: active === label ? C.accent : C.muted, fontWeight: active === label ? 700 : 500, borderBottom: active === label ? `2.5px solid ${C.accent}` : '2.5px solid transparent', paddingBottom: 4, transition: 'all 0.2s' }}>
+          }} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", fontSize: 14, color: active === label ? C.accent : C.muted, fontWeight: active === label ? 700 : 500, borderBottom: active === label ? `2.5px solid ${C.accent}` : '2.5px solid transparent', paddingBottom: 4, transition: 'all 0.2s' }}>
             {label}
           </button>
         ))}
@@ -132,7 +132,7 @@ export function Navbar({ active }: { active?: string }) {
 function Toast({ msg, type, onClose }: { msg: string; type: 'success' | 'error'; onClose: () => void }) {
   useEffect(() => { const t = setTimeout(onClose, 3000); return () => clearTimeout(t); }, [onClose]);
   return (
-    <div style={{ position: 'fixed', bottom: 28, right: 28, zIndex: 9999, background: type === 'success' ? C.success : C.accent2, color: '#fff', borderRadius: 14, padding: '13px 20px', fontFamily: "'Fira Code', monospace", fontWeight: 600, fontSize: 14, display: 'flex', alignItems: 'center', gap: 9, boxShadow: '0 8px 32px rgba(15,23,42,0.18)' }}>
+    <div style={{ position: 'fixed', bottom: 28, right: 28, zIndex: 9999, background: type === 'success' ? C.success : C.accent2, color: '#fff', borderRadius: 14, padding: '13px 20px', fontFamily: "'Montserrat', sans-serif", fontWeight: 600, fontSize: 14, display: 'flex', alignItems: 'center', gap: 9, boxShadow: '0 8px 32px rgba(15,23,42,0.18)' }}>
       {type === 'success' ? <CheckCircle2 size={16} /> : '???'} {msg}
     </div>
   );
@@ -160,7 +160,7 @@ function DonutChart({ easy, medium, hard, total, beatsEasy, beatsMedium, beatsHa
 
   return (
     <div ref={reveal.ref} style={{ ...reveal.style, background: C.surface, border: `1px solid ${C.border}`, borderRadius: 20, padding: '28px 28px 24px', boxShadow: '0 2px 10px rgba(15,23,42,0.05)' }}>
-      <h3 style={{ fontFamily: "'Fira Code', monospace", fontWeight: 800, fontSize: 15, color: C.muted, margin: '0 0 20px', textTransform: 'uppercase', letterSpacing: '0.6px' }}>Problems Solved</h3>
+      <h3 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: 15, color: C.muted, margin: '0 0 20px', textTransform: 'uppercase', letterSpacing: '0.6px' }}>Problems Solved</h3>
       <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
         <div style={{ position: 'relative', width: SIZE, height: SIZE, flexShrink: 0 }}>
           <svg width={SIZE} height={SIZE} style={{ transform: 'rotate(-90deg)' }}>
@@ -171,22 +171,22 @@ function DonutChart({ easy, medium, hard, total, beatsEasy, beatsMedium, beatsHa
             ))}
           </svg>
           <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ fontFamily: "'Fira Code', monospace", fontWeight: 900, fontSize: 34, color: C.ink, lineHeight: 1 }}>{total}</span>
-            <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 11, color: C.muted, marginTop: 4, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Solved</span>
+            <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 900, fontSize: 34, color: C.ink, lineHeight: 1 }}>{total}</span>
+            <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 11, color: C.muted, marginTop: 4, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Solved</span>
           </div>
         </div>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 14 }}>
           {segs.map(s => (
             <div key={s.label}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5, alignItems: 'baseline' }}>
-                <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 13, fontWeight: 700, color: s.color }}>{s.label}</span>
-                <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 13, fontWeight: 800, color: C.ink }}>{s.val}</span>
+                <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, fontWeight: 700, color: s.color }}>{s.label}</span>
+                <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, fontWeight: 800, color: C.ink }}>{s.val}</span>
               </div>
               <div style={{ height: 6, background: '#f1f5f9', borderRadius: 99 }}>
                 <div style={{ width: `${safe ? (s.val / safe) * 100 : 0}%`, height: '100%', background: s.color, borderRadius: 99, transition: 'width 0.7s ease' }} />
               </div>
               {s.beats !== undefined && (
-                <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 10, color: C.muted, margin: '3px 0 0' }}>Beats {s.beats}%</p>
+                <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 10, color: C.muted, margin: '3px 0 0' }}>Beats {s.beats}%</p>
               )}
             </div>
           ))}
@@ -219,26 +219,26 @@ function ContestCard({ contest, history }: {
 
   return (
     <div ref={reveal.ref} style={{ ...reveal.style, background: C.surface, border: `1px solid ${C.border}`, borderRadius: 20, padding: '28px 28px 24px', boxShadow: '0 2px 10px rgba(15,23,42,0.05)' }}>
-      <h3 style={{ fontFamily: "'Fira Code', monospace", fontWeight: 800, fontSize: 15, color: C.muted, margin: '0 0 20px', textTransform: 'uppercase', letterSpacing: '0.6px' }}>Contest Rating</h3>
+      <h3 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: 15, color: C.muted, margin: '0 0 20px', textTransform: 'uppercase', letterSpacing: '0.6px' }}>Contest Rating</h3>
       <div style={{ display: 'flex', gap: 28, alignItems: 'flex-start', flexWrap: 'wrap' }}>
         <div>
-          <p style={{ fontFamily: "'Fira Code', monospace", fontWeight: 900, fontSize: 40, color: ratingColor(contest?.rating), margin: '0 0 4px', lineHeight: 1 }}>
+          <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 900, fontSize: 40, color: ratingColor(contest?.rating), margin: '0 0 4px', lineHeight: 1 }}>
             {contest?.rating ? Math.round(contest.rating) : '???'}
           </p>
-          <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 12, color: C.muted, margin: '0 0 16px' }}>Rating</p>
+          <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 12, color: C.muted, margin: '0 0 16px' }}>Rating</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {contest?.global_ranking && (
-              <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 13, color: C.ink, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, color: C.ink, display: 'flex', alignItems: 'center', gap: 6 }}>
                 <Trophy size={13} color={C.yellow} /> #{contest.global_ranking.toLocaleString()} Global
               </span>
             )}
             {contest?.top_percentage !== undefined && (
-              <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 13, color: C.ink, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, color: C.ink, display: 'flex', alignItems: 'center', gap: 6 }}>
                 <Award size={13} color={C.orange} /> Top {contest.top_percentage.toFixed(1)}%
               </span>
             )}
             {contest?.attended_count !== undefined && (
-              <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 13, color: C.muted, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, color: C.muted, display: 'flex', alignItems: 'center', gap: 6 }}>
                 <TrendingUp size={13} /> {contest.attended_count} contests
               </span>
             )}
@@ -254,7 +254,7 @@ function ContestCard({ contest, history }: {
                 return <circle key={i} cx={x} cy={y} r={3} fill={ratingColor(contest?.rating)} />;
               })}
             </svg>
-            <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 10, color: C.muted, margin: '4px 0 0', textAlign: 'center' }}>Last {ratings.length} contests</p>
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 10, color: C.muted, margin: '4px 0 0', textAlign: 'center' }}>Last {ratings.length} contests</p>
           </div>
         )}
       </div>
@@ -277,17 +277,17 @@ function LanguageBars({ languages }: { languages: { name: string; count: number 
 
   return (
     <div ref={reveal.ref} style={{ ...reveal.style, background: C.surface, border: `1px solid ${C.border}`, borderRadius: 20, padding: '24px 28px', boxShadow: '0 2px 10px rgba(15,23,42,0.05)' }}>
-      <h3 style={{ fontFamily: "'Fira Code', monospace", fontWeight: 800, fontSize: 15, color: C.muted, margin: '0 0 18px', textTransform: 'uppercase', letterSpacing: '0.6px' }}>Languages</h3>
+      <h3 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: 15, color: C.muted, margin: '0 0 18px', textTransform: 'uppercase', letterSpacing: '0.6px' }}>Languages</h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {top.map(l => {
           const color = LANG_COLORS[l.name] || C.accent;
           return (
             <div key={l.name}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5 }}>
-                <span style={{ display: 'flex', alignItems: 'center', gap: 7, fontFamily: "'Fira Code', monospace", fontSize: 13, fontWeight: 700, color: C.ink }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: 7, fontFamily: "'Montserrat', sans-serif", fontSize: 13, fontWeight: 700, color: C.ink }}>
                   <span style={{ width: 8, height: 8, borderRadius: '50%', background: color, flexShrink: 0 }} />{l.name}
                 </span>
-                <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 13, color: C.muted, fontWeight: 600 }}>{l.count}</span>
+                <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, color: C.muted, fontWeight: 600 }}>{l.count}</span>
               </div>
               <div style={{ height: 7, background: '#f1f5f9', borderRadius: 99 }}>
                 <div style={{ width: `${(l.count / maxCount) * 100}%`, height: '100%', background: color, borderRadius: 99, transition: 'width 0.7s ease' }} />
@@ -315,17 +315,17 @@ function TopicTags({ topicTags }: { topicTags: LeetCodeData['topic_tags'] }) {
 
   return (
     <div ref={reveal.ref} style={{ ...reveal.style, background: C.surface, border: `1px solid ${C.border}`, borderRadius: 20, padding: '24px 28px', boxShadow: '0 2px 10px rgba(15,23,42,0.05)' }}>
-      <h3 style={{ fontFamily: "'Fira Code', monospace", fontWeight: 800, fontSize: 15, color: C.muted, margin: '0 0 18px', textTransform: 'uppercase', letterSpacing: '0.6px' }}>Topic Tags</h3>
+      <h3 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: 15, color: C.muted, margin: '0 0 18px', textTransform: 'uppercase', letterSpacing: '0.6px' }}>Topic Tags</h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
         {sections.map(s => {
           const tags = topicTags[s.key] || [];
           if (tags.length === 0) return null;
           return (
             <div key={s.key}>
-              <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 11, fontWeight: 700, color: s.color, margin: '0 0 8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{s.label}</p>
+              <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 11, fontWeight: 700, color: s.color, margin: '0 0 8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{s.label}</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                 {tags.slice(0, 8).map(tag => (
-                  <span key={tag.name} style={{ fontFamily: "'Fira Code', monospace", fontSize: 11, fontWeight: 700, color: s.color, background: s.color + '15', border: `1px solid ${s.color}30`, borderRadius: 99, padding: '3px 10px', whiteSpace: 'nowrap' }}>
+                  <span key={tag.name} style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 11, fontWeight: 700, color: s.color, background: s.color + '15', border: `1px solid ${s.color}30`, borderRadius: 99, padding: '3px 10px', whiteSpace: 'nowrap' }}>
                     {tag.name} · {tag.count}
                   </span>
                 ))}
@@ -366,7 +366,7 @@ function LinkLeetCodePanel({ onLinked }: { onLinked: () => void }) {
     finally { setLoading(false); }
   }
 
-  const inpStyle: React.CSSProperties = { width: '100%', padding: '12px 16px', borderRadius: 12, border: `1px solid ${C.border}`, fontFamily: "'Fira Code', monospace", fontSize: 14, outline: 'none', background: C.surface, color: C.ink, boxSizing: 'border-box' };
+  const inpStyle: React.CSSProperties = { width: '100%', padding: '12px 16px', borderRadius: 12, border: `1px solid ${C.border}`, fontFamily: "'Montserrat', sans-serif", fontSize: 14, outline: 'none', background: C.surface, color: C.ink, boxSizing: 'border-box' };
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 500, padding: 40 }}>
@@ -374,8 +374,8 @@ function LinkLeetCodePanel({ onLinked }: { onLinked: () => void }) {
         <div style={{ width: 72, height: 72, borderRadius: 20, background: C.accentSoft, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
           <Code2 size={36} color={C.accent} />
         </div>
-        <h2 style={{ fontFamily: "'Fira Code', monospace", fontWeight: 900, fontSize: 26, color: C.ink, margin: '0 0 8px' }}>Link LeetCode</h2>
-        <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 14, color: C.muted, margin: '0 0 36px', lineHeight: 1.6 }}>
+        <h2 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 900, fontSize: 26, color: C.ink, margin: '0 0 8px' }}>Link LeetCode</h2>
+        <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 14, color: C.muted, margin: '0 0 36px', lineHeight: 1.6 }}>
           Connect your LeetCode account to showcase your problem-solving stats and achievements.
         </p>
         {step === 'enter' ? (
@@ -385,14 +385,14 @@ function LinkLeetCodePanel({ onLinked }: { onLinked: () => void }) {
               <input style={inpStyle} placeholder="e.g. your_username" value={leetcodeId} onChange={e => setLeetcodeId(e.target.value)} onKeyDown={e => e.key === 'Enter' && getCode()} />
             </div>
             <button onClick={getCode} disabled={loading || !leetcodeId.trim()}
-              style={{ width: '100%', padding: '13px', background: 'linear-gradient(135deg, #A78BFA 0%, #6c47ff 50%, #1a1a2e 100%)', border: 'none', borderRadius: 14, color: '#fff', fontFamily: "'Fira Code', monospace", fontWeight: 700, fontSize: 15, cursor: 'pointer', opacity: loading || !leetcodeId.trim() ? 0.7 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+              style={{ width: '100%', padding: '13px', background: 'linear-gradient(135deg, #A78BFA 0%, #6c47ff 50%, #1a1a2e 100%)', border: 'none', borderRadius: 14, color: '#fff', fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: 15, cursor: 'pointer', opacity: loading || !leetcodeId.trim() ? 0.7 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
               {loading ? 'Getting code???' : <><Target size={16} /> Get Verification Code</>}
             </button>
           </>
         ) : (
           <>
             <div style={{ background: C.accentSoft, borderRadius: 16, padding: '20px 24px', marginBottom: 24 }}>
-              <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 12, color: C.accent, fontWeight: 700, margin: '0 0 8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Your Verification Code</p>
+              <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 12, color: C.accent, fontWeight: 700, margin: '0 0 8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Your Verification Code</p>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
                 <span style={{ fontFamily: 'monospace', fontSize: 28, fontWeight: 900, color: C.accent, letterSpacing: 4 }}>{code}</span>
                 <button onClick={() => navigator.clipboard.writeText(code)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: C.accent }}>
@@ -400,14 +400,14 @@ function LinkLeetCodePanel({ onLinked }: { onLinked: () => void }) {
                 </button>
               </div>
             </div>
-            <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 13, color: C.muted, marginBottom: 28, lineHeight: 1.6 }}>
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, color: C.muted, marginBottom: 28, lineHeight: 1.6 }}>
               Add this code to your LeetCode bio at <strong>leetcode.com/profile</strong>, then click Verify below.
             </p>
             <button onClick={link} disabled={loading}
-              style={{ width: '100%', padding: '13px', background: 'linear-gradient(135deg, #A78BFA 0%, #6c47ff 50%, #1a1a2e 100%)', border: 'none', borderRadius: 14, color: '#fff', fontFamily: "'Fira Code', monospace", fontWeight: 700, fontSize: 15, cursor: 'pointer', opacity: loading ? 0.7 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 12 }}>
+              style={{ width: '100%', padding: '13px', background: 'linear-gradient(135deg, #A78BFA 0%, #6c47ff 50%, #1a1a2e 100%)', border: 'none', borderRadius: 14, color: '#fff', fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: 15, cursor: 'pointer', opacity: loading ? 0.7 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 12 }}>
               {loading ? 'Verifying???' : <><CheckCircle2 size={16} /> Verify and Link</>}
             </button>
-            <button onClick={() => setStep('enter')} style={{ background: 'none', border: 'none', color: C.muted, cursor: 'pointer', fontFamily: "'Fira Code', monospace", fontSize: 13, fontWeight: 600 }}>Back</button>
+            <button onClick={() => setStep('enter')} style={{ background: 'none', border: 'none', color: C.muted, cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", fontSize: 13, fontWeight: 600 }}>Back</button>
           </>
         )}
       </div>
@@ -442,23 +442,23 @@ function ProfileSidebar({ leetcode, updating, onUpdate }: {
       </div>
 
       {leetcode.real_name && (
-        <h2 style={{ fontFamily: "'Fira Code', monospace", fontWeight: 900, fontSize: 22, color: C.ink, margin: '0 0 2px', letterSpacing: '-0.5px' }}>{leetcode.real_name}</h2>
+        <h2 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 900, fontSize: 22, color: C.ink, margin: '0 0 2px', letterSpacing: '-0.5px' }}>{leetcode.real_name}</h2>
       )}
       <a href={`https://leetcode.com/${leetcode.username}`} target="_blank" rel="noopener noreferrer"
-        style={{ fontFamily: "'Fira Code', monospace", fontSize: 13, color: C.accent, fontWeight: 600, textDecoration: 'none', display: 'block', marginBottom: 12 }}>
+        style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, color: C.accent, fontWeight: 600, textDecoration: 'none', display: 'block', marginBottom: 12 }}>
         @{leetcode.username}
       </a>
 
       {leetcode.about && (
-        <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 13, color: C.muted, lineHeight: 1.6, margin: '0 0 16px' }}>{leetcode.about}</p>
+        <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, color: C.muted, lineHeight: 1.6, margin: '0 0 16px' }}>{leetcode.about}</p>
       )}
 
       {leetcode.contest?.rating && (
         <div style={{ background: `${ratingColor}15`, border: `1.5px solid ${ratingColor}40`, borderRadius: 12, padding: '10px 14px', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
           <Trophy size={16} color={ratingColor} />
           <div>
-            <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 11, color: ratingColor, fontWeight: 700, margin: 0, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Contest Rating</p>
-            <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 18, fontWeight: 900, color: ratingColor, margin: 0 }}>{Math.round(leetcode.contest.rating)}</p>
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 11, color: ratingColor, fontWeight: 700, margin: 0, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Contest Rating</p>
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 18, fontWeight: 900, color: ratingColor, margin: 0 }}>{Math.round(leetcode.contest.rating)}</p>
           </div>
         </div>
       )}
@@ -467,7 +467,7 @@ function ProfileSidebar({ leetcode, updating, onUpdate }: {
         {leetcode.ranking && (
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <Award size={14} color={C.muted} />
-            <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 13, color: C.ink }}>
+            <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, color: C.ink }}>
               Ranked <strong>#{leetcode.ranking.toLocaleString()}</strong>
             </span>
           </div>
@@ -475,29 +475,29 @@ function ProfileSidebar({ leetcode, updating, onUpdate }: {
         {leetcode.country && (
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <Globe size={14} color={C.muted} />
-            <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 13, color: C.muted }}>{leetcode.country}</span>
+            <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, color: C.muted }}>{leetcode.country}</span>
           </div>
         )}
 
       </div>
 
       <div style={{ background: C.paper, borderRadius: 12, padding: '12px 14px', marginBottom: 20 }}>
-        <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 11, color: C.muted, margin: '0 0 10px', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 700 }}>Community Stats</p>
+        <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 11, color: C.muted, margin: '0 0 10px', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 700 }}>Community Stats</p>
         <div style={{ display: 'flex', gap: 20 }}>
           <div style={{ textAlign: 'center' }}>
-            <p style={{ fontFamily: "'Fira Code', monospace", fontWeight: 900, fontSize: 20, color: C.ink, margin: 0 }}>{totalSolved}</p>
-            <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 10, color: C.muted, margin: '2px 0 0', textTransform: 'uppercase' }}>Solved</p>
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 900, fontSize: 20, color: C.ink, margin: 0 }}>{totalSolved}</p>
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 10, color: C.muted, margin: '2px 0 0', textTransform: 'uppercase' }}>Solved</p>
           </div>
           {leetcode.reputation !== undefined && (
             <div style={{ textAlign: 'center' }}>
-              <p style={{ fontFamily: "'Fira Code', monospace", fontWeight: 900, fontSize: 20, color: C.ink, margin: 0 }}>{leetcode.reputation}</p>
-              <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 10, color: C.muted, margin: '2px 0 0', textTransform: 'uppercase' }}>Rep</p>
+              <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 900, fontSize: 20, color: C.ink, margin: 0 }}>{leetcode.reputation}</p>
+              <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 10, color: C.muted, margin: '2px 0 0', textTransform: 'uppercase' }}>Rep</p>
             </div>
           )}
           {leetcode.contest?.attended_count !== undefined && (
             <div style={{ textAlign: 'center' }}>
-              <p style={{ fontFamily: "'Fira Code', monospace", fontWeight: 900, fontSize: 20, color: C.ink, margin: 0 }}>{leetcode.contest.attended_count}</p>
-              <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 10, color: C.muted, margin: '2px 0 0', textTransform: 'uppercase' }}>Contests</p>
+              <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 900, fontSize: 20, color: C.ink, margin: 0 }}>{leetcode.contest.attended_count}</p>
+              <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 10, color: C.muted, margin: '2px 0 0', textTransform: 'uppercase' }}>Contests</p>
             </div>
           )}
         </div>
@@ -505,10 +505,10 @@ function ProfileSidebar({ leetcode, updating, onUpdate }: {
 
       {leetcode.skill_tags && leetcode.skill_tags.length > 0 && (
         <div style={{ marginBottom: 20 }}>
-          <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 11, color: C.muted, margin: '0 0 8px', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 700 }}>Skills</p>
+          <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 11, color: C.muted, margin: '0 0 8px', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 700 }}>Skills</p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
             {leetcode.skill_tags.slice(0, 12).map(tag => (
-              <span key={tag} style={{ fontFamily: "'Fira Code', monospace", fontSize: 11, fontWeight: 600, color: C.accent, background: C.accentSoft, borderRadius: 6, padding: '3px 8px' }}>{tag}</span>
+              <span key={tag} style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 11, fontWeight: 600, color: C.accent, background: C.accentSoft, borderRadius: 6, padding: '3px 8px' }}>{tag}</span>
             ))}
           </div>
         </div>
@@ -517,7 +517,7 @@ function ProfileSidebar({ leetcode, updating, onUpdate }: {
       <button onClick={onUpdate} disabled={updating}
         onMouseEnter={e => { e.currentTarget.style.borderColor = C.accent; e.currentTarget.style.color = C.accent; }}
         onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.muted; }}
-        style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%', background: 'none', border: `1.5px solid ${C.border}`, borderRadius: 10, padding: '9px 13px', fontSize: 13, color: C.muted, cursor: 'pointer', fontFamily: "'Fira Code', monospace", fontWeight: 600, transition: 'all 0.2s', opacity: updating ? 0.6 : 1 }}>
+        style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%', background: 'none', border: `1.5px solid ${C.border}`, borderRadius: 10, padding: '9px 13px', fontSize: 13, color: C.muted, cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", fontWeight: 600, transition: 'all 0.2s', opacity: updating ? 0.6 : 1 }}>
         <RefreshCw size={14} style={{ animation: updating ? 'spin 1s linear infinite' : 'none' }} />
         {updating ? 'Refreshing???' : 'Refresh LeetCode'}
       </button>
@@ -567,7 +567,7 @@ export default function DsaPage() {
   const totalSolved = (leetcode?.easy_solved || 0) + (leetcode?.medium_solved || 0) + (leetcode?.hard_solved || 0);
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg,#f8fafc 0%,#eef2ff 60%,#f5f3ff 100%)', fontFamily: "'Fira Code', monospace" }}>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg,#f8fafc 0%,#eef2ff 60%,#f5f3ff 100%)', fontFamily: "'Montserrat', sans-serif" }}>
       <Navbar active="DSA" />
 
       {/* FIXED ICON SIDEBAR */}
@@ -587,10 +587,10 @@ export default function DsaPage() {
       <main style={{ marginLeft: 72, paddingTop: NAV_H, minHeight: '100vh' }}>
         <div style={{ padding: '48px 56px 100px' }}>
           <div style={{ marginBottom: 40 }}>
-            <h1 style={{ fontFamily: "'Fira Code', monospace", fontWeight: 900, fontSize: 44, color: C.ink, margin: '0 0 8px', letterSpacing: '-2px', lineHeight: 1 }}>
+            <h1 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 900, fontSize: 44, color: C.ink, margin: '0 0 8px', letterSpacing: '-2px', lineHeight: 1 }}>
               My <span style={{ color: C.accent }}>DSA Journey</span>
             </h1>
-            <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 14, color: C.muted, margin: 0, fontWeight: 500 }}>
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 14, color: C.muted, margin: 0, fontWeight: 500 }}>
               Track your problem-solving progress, stats, and achievements
             </p>
           </div>

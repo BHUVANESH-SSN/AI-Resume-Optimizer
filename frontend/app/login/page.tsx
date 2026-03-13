@@ -43,14 +43,14 @@ function Field({
     <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
       <label style={{
         display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 600,
-        color: '#5a576e', letterSpacing: 0.4, textTransform: 'uppercase', fontFamily: "'Fira Code', monospace"
+        color: '#5a576e', letterSpacing: 0.4, textTransform: 'uppercase', fontFamily: "'Montserrat', sans-serif"
       }}>
         <span style={{ color: error ? '#ef4444' : '#6c47ff', display: 'flex' }}>{icon}</span>
         {label}
       </label>
       {children}
       {error && (
-        <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11.5, color: '#ef4444', fontWeight: 600, fontFamily: "'Fira Code', monospace" }}>
+        <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11.5, color: '#ef4444', fontWeight: 600, fontFamily: "'Montserrat', sans-serif" }}>
           <svg width="11" height="11" viewBox="0 0 12 12" fill="currentColor"><path d="M6 1a5 5 0 100 10A5 5 0 006 1zm0 7.5a.6.6 0 110-1.2.6.6 0 010 1.2zm.5-2.5h-1V3.5h1V6z" /></svg>
           {error}
         </span>
@@ -123,7 +123,7 @@ export default function LoginPage() {
             border: '1px solid rgba(108, 71, 255, 0.2)', borderRadius: 20, padding: '4px 12px', marginBottom: 14,
           }}>
             <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#6c47ff', animation: 'pulse 2s infinite' }} />
-            <span style={{ fontSize: 11, fontWeight: 700, color: '#6c47ff', letterSpacing: 1.5, textTransform: 'uppercase', fontFamily: "'Fira Code', monospace" }}>
+            <span style={{ fontSize: 11, fontWeight: 700, color: '#6c47ff', letterSpacing: 1.5, textTransform: 'uppercase', fontFamily: "'Montserrat', sans-serif" }}>
               Welcome Back
             </span>
           </div>
@@ -132,7 +132,7 @@ export default function LoginPage() {
             Log in to your<br />
             <span className="heading-accent">Dashboard</span>
           </h1>
-          <p style={{ fontSize: 14.5, color: '#9896a4', lineHeight: 1.65, fontFamily: "'Fira Code', monospace", fontWeight: 400, margin: 0 }}>
+          <p style={{ fontSize: 14.5, color: '#9896a4', lineHeight: 1.65, fontFamily: "'Montserrat', sans-serif", fontWeight: 400, margin: 0 }}>
             Access your tailored resumes, gap analysis, and applications.
           </p>
         </div>
@@ -148,7 +148,7 @@ export default function LoginPage() {
 
         {/* ── Social Sign‑in ── */}
         <div className="fade-in-up fade-in-up-delay-1" style={{ marginBottom: 20 }}>
-          <p style={{ fontSize: 11.5, color: '#9896a4', fontWeight: 600, letterSpacing: 0.5, marginBottom: 10, fontFamily: "'Fira Code', monospace" }}>
+          <p style={{ fontSize: 11.5, color: '#9896a4', fontWeight: 600, letterSpacing: 0.5, marginBottom: 10, fontFamily: "'Montserrat', sans-serif" }}>
             Quick sign‑in with
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
@@ -158,7 +158,7 @@ export default function LoginPage() {
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '11px 16px',
                 border: '1.5px solid #e5e4ef', borderRadius: 12, background: 'white', fontSize: 13.5, fontWeight: 700,
-                color: '#1A1624', cursor: 'pointer', transition: 'all 0.2s', fontFamily: "'Fira Code', monospace",
+                color: '#1A1624', cursor: 'pointer', transition: 'all 0.2s', fontFamily: "'Montserrat', sans-serif",
                 boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
               }}
               onMouseEnter={e => {
@@ -184,7 +184,7 @@ export default function LoginPage() {
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '11px 16px',
                 border: '1.5px solid #e5e4ef', borderRadius: 12, background: 'white', fontSize: 13.5, fontWeight: 700,
-                color: '#1A1624', cursor: 'pointer', transition: 'all 0.2s', fontFamily: "'Fira Code', monospace",
+                color: '#1A1624', cursor: 'pointer', transition: 'all 0.2s', fontFamily: "'Montserrat', sans-serif",
                 boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
               }}
               onMouseEnter={e => {
@@ -207,7 +207,7 @@ export default function LoginPage() {
         {/* ── Divider ── */}
         <div className="fade-in-up fade-in-up-delay-1" style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
           <div style={{ flex: 1, height: 1, background: '#e5e4ef' }} />
-          <span style={{ fontSize: 10.5, color: '#b0aec8', fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', fontFamily: "'Fira Code', monospace" }}>
+          <span style={{ fontSize: 10.5, color: '#b0aec8', fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', fontFamily: "'Montserrat', sans-serif" }}>
             or sign in with email
           </span>
           <div style={{ flex: 1, height: 1, background: '#e5e4ef' }} />
@@ -237,11 +237,11 @@ export default function LoginPage() {
 
           {/* Remember / Forgot */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <label className="checkbox-label" style={{ fontFamily: "'Fira Code', monospace", fontSize: 12.5, fontWeight: 600 }}>
+            <label className="checkbox-label" style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 12.5, fontWeight: 600 }}>
               <input type="checkbox" checked={remember} onChange={e => setRemember(e.target.checked)} />
               Remember me
             </label>
-            <button type="button" className="btn-link" style={{ fontFamily: "'Fira Code', monospace", fontSize: 12.5, fontWeight: 700, color: '#6c47ff' }}>
+            <button type="button" className="btn-link" style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 12.5, fontWeight: 700, color: '#6c47ff' }}>
               Forgot Password?
             </button>
           </div>
@@ -255,7 +255,7 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <p className="fade-in-up fade-in-up-delay-3" style={{ marginTop: 24, fontSize: 13.5, color: '#9896a4', textAlign: 'center', fontFamily: "'Fira Code', monospace" }}>
+        <p className="fade-in-up fade-in-up-delay-3" style={{ marginTop: 24, fontSize: 13.5, color: '#9896a4', textAlign: 'center', fontFamily: "'Montserrat', sans-serif" }}>
           New to AIRO?{' '}
           <Link href="/signup" style={{ color: '#6c47ff', fontWeight: 700, textDecoration: 'none' }}>
             Create an account

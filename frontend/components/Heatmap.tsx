@@ -56,7 +56,7 @@ const Heatmap = ({ gapData, atsKeywords }: HeatmapProps) => {
             <rect x="14" y="14" width="7" height="7" rx="1" />
           </svg>
         </div>
-        <h2 style={{ fontFamily: "'Fira Code', monospace", fontWeight: 800, fontSize: 20, color: C.ink, margin: 0 }}>
+        <h2 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: 20, color: C.ink, margin: 0 }}>
           ATS Keyword Heatmap
         </h2>
       </div>
@@ -65,10 +65,10 @@ const Heatmap = ({ gapData, atsKeywords }: HeatmapProps) => {
       {hasAts && (
         <>
           <div style={{ display: 'flex', gap: 20, marginBottom: 8 }}>
-            <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 12, fontWeight: 700, color: C.success }}>
+            <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 12, fontWeight: 700, color: C.success }}>
               ✓ {atsKeywords!.matched.length} Matched
             </span>
-            <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 12, fontWeight: 700, color: C.danger }}>
+            <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 12, fontWeight: 700, color: C.danger }}>
               ✗ {atsKeywords!.missing.length} Missing
             </span>
           </div>
@@ -83,7 +83,7 @@ const Heatmap = ({ gapData, atsKeywords }: HeatmapProps) => {
                   background: C.successSoft, color: C.success,
                   border: `1px solid #86efac`, borderRadius: 8,
                   padding: '4px 10px', fontSize: 12, fontWeight: 700,
-                  fontFamily: "'Fira Code', monospace",
+                  fontFamily: "'Montserrat', sans-serif",
                 }}>
                   {kw}
                 </span>
@@ -93,7 +93,7 @@ const Heatmap = ({ gapData, atsKeywords }: HeatmapProps) => {
                   background: C.dangerSoft, color: C.danger,
                   border: `1px solid #fca5a5`, borderRadius: 8,
                   padding: '4px 10px', fontSize: 12, fontWeight: 700,
-                  fontFamily: "'Fira Code', monospace",
+                  fontFamily: "'Montserrat', sans-serif",
                 }}>
                   {kw}
                 </span>
@@ -104,7 +104,7 @@ const Heatmap = ({ gapData, atsKeywords }: HeatmapProps) => {
           {/* ── Section Coverage ── */}
           {sectionEntries.length > 0 && (
             <div style={{ marginBottom: 24 }}>
-              <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 13, fontWeight: 700, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: 12 }}>
+              <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, fontWeight: 700, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: 12 }}>
                 Section Coverage
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -113,10 +113,10 @@ const Heatmap = ({ gapData, atsKeywords }: HeatmapProps) => {
                   return (
                     <div key={section}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-                        <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 12, fontWeight: 600, color: C.ink, textTransform: 'capitalize' }}>
+                        <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 12, fontWeight: 600, color: C.ink, textTransform: 'capitalize' }}>
                           {section.replace(/_/g, ' ')}
                         </span>
-                        <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 12, fontWeight: 700, color: barColor }}>
+                        <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 12, fontWeight: 700, color: barColor }}>
                           {pct.toFixed(0)}%
                         </span>
                       </div>
@@ -142,7 +142,7 @@ const Heatmap = ({ gapData, atsKeywords }: HeatmapProps) => {
           {hasAts && (
             <div style={{ borderTop: `1px solid ${C.border}`, margin: '4px 0 20px' }} />
           )}
-          <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 13, fontWeight: 700, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: 12 }}>
+          <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, fontWeight: 700, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: 12 }}>
             Skill Gap Analysis
           </p>
           <div style={{
@@ -161,7 +161,7 @@ const Heatmap = ({ gapData, atsKeywords }: HeatmapProps) => {
                     style={{
                       background: bg, color: fg, border: `1px solid ${br}`,
                       borderRadius: 8, padding: '4px 10px', fontSize: 12,
-                      fontWeight: 700, fontFamily: "'Fira Code', monospace", cursor: 'default',
+                      fontWeight: 700, fontFamily: "'Montserrat', sans-serif", cursor: 'default',
                     }}
                   >
                     {gs.skill}
@@ -185,7 +185,7 @@ function LegendDot({ color, label }: { color: string; label: string }) {
   return (
     <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
       <span style={{ width: 8, height: 8, borderRadius: '50%', background: color, display: 'inline-block' }} />
-      <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 11, color: '#64748b' }}>{label}</span>
+      <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 11, color: '#64748b' }}>{label}</span>
     </span>
   );
 }

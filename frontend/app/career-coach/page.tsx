@@ -85,14 +85,14 @@ function Navbar({ active }: { active?: string }) {
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="8 7 2 12 8 17" /><polyline points="16 7 22 12 16 17" />
         </svg>
-        <span style={{ fontFamily: "'Fira Code', monospace", fontWeight: 900, fontSize: '18px', letterSpacing: '-0.5px', color: '#0d0d14', display: 'flex', alignItems: 'baseline', lineHeight: 1 }}>
+        <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 900, fontSize: '18px', letterSpacing: '-0.5px', color: '#0d0d14', display: 'flex', alignItems: 'baseline', lineHeight: 1 }}>
           AIRO<div style={{ width: '6px', height: '6px', backgroundColor: '#7c3aed', marginLeft: '4px' }} />
         </span>
       </div>
       <div style={{ flex: 1, display: 'flex', justifyContent: 'center', gap: 32, marginRight: '60px' }}>
         {NAV.map(label => (
           <button key={label} onClick={() => router.push(paths[label] || '/home')}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: "'Fira Code', monospace", fontSize: 14, color: active === label ? C.accent : C.muted, fontWeight: active === label ? 700 : 500, borderBottom: active === label ? `2.5px solid ${C.accent}` : '2.5px solid transparent', paddingBottom: 4, transition: 'all 0.2s' }}>
+            style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", fontSize: 14, color: active === label ? C.accent : C.muted, fontWeight: active === label ? 700 : 500, borderBottom: active === label ? `2.5px solid ${C.accent}` : '2.5px solid transparent', paddingBottom: 4, transition: 'all 0.2s' }}>
             {label}
           </button>
         ))}
@@ -126,7 +126,7 @@ function renderMarkdown(raw: string): React.ReactNode[] {
     // ## Section heading
     if (t.startsWith('## ')) {
       nodes.push(
-        <h3 key={i} style={{ fontFamily: "'Fira Code', monospace", fontWeight: 800, fontSize: 14.5, color: C.ink, margin: '20px 0 8px', borderBottom: `1.5px solid ${C.accentSoft}`, paddingBottom: 5, letterSpacing: '-0.2px' }}>
+        <h3 key={i} style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: 14.5, color: C.ink, margin: '20px 0 8px', borderBottom: `1.5px solid ${C.accentSoft}`, paddingBottom: 5, letterSpacing: '-0.2px' }}>
           {t.slice(3)}
         </h3>
       );
@@ -136,7 +136,7 @@ function renderMarkdown(raw: string): React.ReactNode[] {
     // **Bold standalone line**
     if (t.startsWith('**') && t.endsWith('**') && t.length > 4) {
       nodes.push(
-        <p key={i} style={{ fontFamily: "'Fira Code', monospace", fontSize: 13.5, fontWeight: 800, color: C.ink, margin: '10px 0 4px' }}>
+        <p key={i} style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13.5, fontWeight: 800, color: C.ink, margin: '10px 0 4px' }}>
           {t.slice(2, -2)}
         </p>
       );
@@ -148,7 +148,7 @@ function renderMarkdown(raw: string): React.ReactNode[] {
       nodes.push(
         <div key={i} style={{ display: 'flex', gap: 9, marginBottom: 5, paddingLeft: 4 }}>
           <span style={{ color: C.accent, flexShrink: 0, marginTop: 4, fontSize: 10 }}>▸</span>
-          <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 13.5, color: '#334155', lineHeight: 1.75 }}>
+          <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13.5, color: '#334155', lineHeight: 1.75 }}>
             {renderInline(t.slice(2))}
           </span>
         </div>
@@ -161,10 +161,10 @@ function renderMarkdown(raw: string): React.ReactNode[] {
     if (numMatch) {
       nodes.push(
         <div key={i} style={{ display: 'flex', gap: 10, marginBottom: 8, alignItems: 'flex-start' }}>
-          <span style={{ fontFamily: "'Fira Code', monospace", fontWeight: 900, fontSize: 11, color: '#fff', background: C.accent, borderRadius: '50%', minWidth: 22, height: 22, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
+          <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 900, fontSize: 11, color: '#fff', background: C.accent, borderRadius: '50%', minWidth: 22, height: 22, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
             {numMatch[1]}
           </span>
-          <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 13.5, color: '#334155', lineHeight: 1.75 }}>
+          <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13.5, color: '#334155', lineHeight: 1.75 }}>
             {renderInline(numMatch[2])}
           </span>
         </div>
@@ -174,7 +174,7 @@ function renderMarkdown(raw: string): React.ReactNode[] {
 
     // Regular paragraph
     nodes.push(
-      <p key={i} style={{ fontFamily: "'Fira Code', monospace", fontSize: 13.5, color: '#334155', lineHeight: 1.8, margin: '3px 0' }}>
+      <p key={i} style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13.5, color: '#334155', lineHeight: 1.8, margin: '3px 0' }}>
         {renderInline(t)}
       </p>
     );
@@ -194,7 +194,7 @@ function BotAvatar() {
 
 function UserAvatar({ initial }: { initial: string }) {
   return (
-    <div style={{ width: 34, height: 34, borderRadius: '50%', background: '#cbd5e1', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#475569', fontFamily: "'Fira Code', monospace", fontWeight: 800, fontSize: 14, flexShrink: 0 }}>
+    <div style={{ width: 34, height: 34, borderRadius: '50%', background: '#cbd5e1', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#475569', fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: 14, flexShrink: 0 }}>
       {initial.toUpperCase()}
     </div>
   );
@@ -218,7 +218,7 @@ function MessageBubble({
 
       <div style={{ maxWidth: '78%', minWidth: 60 }}>
         {isBot && (
-          <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 10, fontWeight: 700, color: C.accent, margin: '0 0 5px', textTransform: 'uppercase', letterSpacing: '0.6px' }}>
+          <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 10, fontWeight: 700, color: C.accent, margin: '0 0 5px', textTransform: 'uppercase', letterSpacing: '0.6px' }}>
             Nova AI
           </p>
         )}
@@ -238,7 +238,7 @@ function MessageBubble({
               {message.streaming && <span className="rm-cursor">▌</span>}
             </>
           ) : (
-            <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 14, margin: 0, lineHeight: 1.6 }}>
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 14, margin: 0, lineHeight: 1.6 }}>
               {message.content}
             </p>
           )}
@@ -250,7 +250,7 @@ function MessageBubble({
             <button
               onClick={onAnalyze}
               disabled={analyzing}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 20px', background: analyzing ? C.muted : 'linear-gradient(135deg, #A78BFA 0%, #6c47ff 50%, #1a1a2e 100%)', border: 'none', borderRadius: 12, fontFamily: "'Fira Code', monospace", fontSize: 13, fontWeight: 700, color: '#fff', cursor: analyzing ? 'not-allowed' : 'pointer', boxShadow: analyzing ? 'none' : `0 4px 14px ${C.accent}40`, transition: 'all 0.2s' }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '10px 20px', background: analyzing ? C.muted : 'linear-gradient(135deg, #A78BFA 0%, #6c47ff 50%, #1a1a2e 100%)', border: 'none', borderRadius: 12, fontFamily: "'Montserrat', sans-serif", fontSize: 13, fontWeight: 700, color: '#fff', cursor: analyzing ? 'not-allowed' : 'pointer', boxShadow: analyzing ? 'none' : `0 4px 14px ${C.accent}40`, transition: 'all 0.2s' }}
             >
               {analyzing
                 ? <><RefreshCw size={14} className="rm-spin" /> Analyzing...</>
@@ -409,7 +409,7 @@ export default function ChatbotPage() {
   const inputDisabled = !analyzed || isLoading;
 
   return (
-    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', background: 'linear-gradient(160deg,#f8fafc 0%,#eef2ff 60%,#f5f3ff 100%)', fontFamily: "'Fira Code', monospace", overflow: 'hidden' }}>
+    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', background: 'linear-gradient(160deg,#f8fafc 0%,#eef2ff 60%,#f5f3ff 100%)', fontFamily: "'Montserrat', sans-serif", overflow: 'hidden' }}>
       <Navbar active="Nova AI" />
 
       {/* ICON SIDEBAR */}
@@ -441,8 +441,8 @@ export default function ChatbotPage() {
             <Bot size={18} />
           </div>
           <div>
-            <p style={{ fontFamily: "'Fira Code', monospace", fontWeight: 900, fontSize: 15, color: C.ink, margin: 0 }}>Nova AI</p>
-            <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 11, color: isLoading ? C.accent : C.success, margin: 0, fontWeight: 600 }}>
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 900, fontSize: 15, color: C.ink, margin: 0 }}>Nova AI</p>
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 11, color: isLoading ? C.accent : C.success, margin: 0, fontWeight: 600 }}>
               {analyzing ? '● analyzing your profile...' : chatting ? '● typing...' : '● online'}
             </p>
           </div>
@@ -466,7 +466,7 @@ export default function ChatbotPage() {
         {/* Input bar */}
         <div style={{ flexShrink: 0, borderTop: `1px solid ${C.border}`, padding: '12px 44px 16px', background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(12px)' }}>
           {!analyzed && !analyzing && (
-            <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 11, color: C.muted, margin: '0 0 8px', textAlign: 'center', letterSpacing: '0.2px' }}>
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 11, color: C.muted, margin: '0 0 8px', textAlign: 'center', letterSpacing: '0.2px' }}>
               Click <strong style={{ color: C.accent }}>Analyze My Profile</strong> above to unlock the chat
             </p>
           )}
@@ -478,7 +478,7 @@ export default function ChatbotPage() {
               onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }}
               disabled={inputDisabled}
               placeholder={analyzed ? 'Ask Nova AI about your skills, projects, career path...' : 'Analyze your profile first to start chatting'}
-              style={{ flex: 1, padding: '11px 16px', borderRadius: 14, border: `1.5px solid ${inputDisabled ? C.border : C.border}`, fontFamily: "'Fira Code', monospace", fontSize: 14, color: C.ink, background: inputDisabled ? '#f8fafc' : C.surface, outline: 'none', transition: 'border-color 0.2s', opacity: inputDisabled ? 0.55 : 1 }}
+              style={{ flex: 1, padding: '11px 16px', borderRadius: 14, border: `1.5px solid ${inputDisabled ? C.border : C.border}`, fontFamily: "'Montserrat', sans-serif", fontSize: 14, color: C.ink, background: inputDisabled ? '#f8fafc' : C.surface, outline: 'none', transition: 'border-color 0.2s', opacity: inputDisabled ? 0.55 : 1 }}
               onFocus={e => { if (!inputDisabled) e.currentTarget.style.borderColor = C.accent; }}
               onBlur={e => { e.currentTarget.style.borderColor = C.border; }}
             />
