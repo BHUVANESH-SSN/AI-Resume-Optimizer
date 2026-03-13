@@ -50,6 +50,7 @@ allowed_origins = [
     "http://127.0.0.1:3000",
     "http://localhost:5000",
     "http://127.0.0.1:5000",
+    "https://placement-prediction-with-ai-resume-w4m8.onrender.com"
 ]
 # Add production frontend URL if set
 if os.getenv("FRONTEND_URL"):

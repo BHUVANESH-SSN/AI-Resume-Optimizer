@@ -145,7 +145,7 @@ async def google_callback(
 
         from fastapi.responses import RedirectResponse
 
-        frontend_url = "https://placement-prediction-with-ai-resume.onrender.com"
+        frontend_url = "https://placement-prediction-with-ai-resume-w4m8.onrender.com"
 
         redirect_url = (
             f"{frontend_url}/oauth-success"
@@ -253,7 +253,7 @@ async def github_callback(
         
         from fastapi.responses import RedirectResponse
 
-        frontend_url = "https://placement-prediction-with-ai-resume.onrender.com"
+        frontend_url = "https://placement-prediction-with-ai-resume-w4m8.onrender.com"
 
         redirect_url = (
             f"{frontend_url}/oauth-success"
