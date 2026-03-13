@@ -6,24 +6,34 @@ services:
     name: airo-backend
     env: docker
     rootDir: backend
-    plan: free # Change to 'starter' if you need more RAM for ML models
+    plan: starter # Upgraded from free for ML model support
     envVars:
       - key: MONGO_URI
-        sync: false # You will need to paste this in Render Dashboard
+        sync: false # Paste MongoDB connection string in Render Dashboard
       - key: DB_NAME
         value: airo_db
       - key: JWT_SECRET_KEY
-        generateValue: true
+        generateValue: true # Auto-generates secure key
       - key: JWT_ALGO
         value: HS256
       - key: GROQ_API_KEY
-        sync: false # You will need to paste this in Render Dashboard
+        sync: false # Paste Groq API key in Render Dashboard
+      - key: GITHUB_TOKEN
+        sync: false # Optional: GitHub API token
       - key: MAIL_USERNAME
-        sync: false
+        sync: false # Email address for notifications
       - key: MAIL_PASSWORD
-        sync: false
+        sync: false # Email app password (use Gmail app password)
       - key: MAIL_FROM
-        sync: false
+        sync: false # Sender email address
+      - key: MAIL_SERVER
+        value: smtp.gmail.com
+      - key: MAIL_PORT
+        value: "587"
+      - key: MAIL_FROM_NAME
+        value: "AIRO Support"
+      - key: FRONTEND_URL
+        sync: false # Set to https://airo-frontend-xxx.onrender.com after deployment
 
   # ──────────────────────────────────────────────────────────
   # Frontend Service (Next.js) 
@@ -31,9 +41,14 @@ services:
   - type: web
     name: airo-frontend
     env: node
-    plan: free
-    buildCommand: npm install && npm run build
+    rootDir: frontend
+    plan: starter
+    buildCommand: npm ci && npm run build
     startCommand: npm start
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        sync: false # Paste the URL of your backend here (e.g. https://airo-backend.onrender.com)
+        sync: false # Set to https://airo-backend-xxx.onrender.com after deployment
+      - key: NODE_ENV
+        value: production
+      - key: NODE_OPTIONS
+        value: --max-old-space-size=1024

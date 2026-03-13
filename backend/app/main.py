@@ -42,9 +42,21 @@ app = FastAPI(
 app.add_middleware(LoggingMiddleware)
 app.add_middleware(RateLimitMiddleware)
 app.add_middleware(AuthMiddleware)
+
+# ── CORS Configuration ─────────────────────────────────────────────────────────
+# Allow localhost in development, and configured frontend URL in production
+allowed_origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:5000",
+    "http://127.0.0.1:5000",
+]
+# Add production frontend URL if set
+if os.getenv("FRONTEND_URL"):
+    allowed_origins.append(os.getenv("FRONTEND_URL"))
+
 app.add_middleware(CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000","http://localhost:5000",
-    "http://127.0.0.1:5000",],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
